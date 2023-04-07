@@ -1,0 +1,150 @@
+header {
+    background: #F3F3F3;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+    height: 110px;
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.logoBlock {
+    display: flex;
+    align-items: center;
+}
+
+.logoBlock > img {
+    display: block;
+}
+
+.logoTitle {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+}
+
+.logoTitle > .title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.logoTitle > .subtitle {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #878787;
+}
+
+.searchBlock {
+    width: 342px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 14px 16px;
+    gap: 16px;
+    background: #FFFFFF;
+    border: 2px solid #878787;
+    border-radius: 8px;
+}
+
+.search_img {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url('../../assets/images/icon/search.svg') no-repeat;
+}
+
+.searchBlock .search_input:focus {
+    color: #AD02E0;
+}
+
+.searchBlock:focus-within {
+    border: 2px solid #AD02E0;
+}
+
+.searchBlock .search_input:focus+.search_img{
+    display: none;
+}
+
+.searchBlock .search_input {
+    order: 2;
+    border: none;
+    width: 100%;
+    outline: none;
+    text-align: left;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #919191;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+}
+
+.authBlock {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.authBlock button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 38px;
+    gap: 10px;
+    border-radius: 8px;
+    border: 2px solid #AD02E0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+}
+
+.defBtnLogin {
+    color: #000000;
+}
+
+.defBtnLogin:hover,
+.defBtnLogin:active {
+    color: #FFFFFF;
+}
+
+.defBtnLogin:hover {
+    background: #AD02E0;
+    box-shadow: 0 0 20px #AD02E0;
+}
+
+.defBtnLogin:active {
+    background: #740994;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.defBtnReg {
+    background: #AD02E0;
+    color: #FFFFFF;
+}
+
+.defBtnReg:hover {
+    background: #AD02E0;
+    border: 3px solid #AD02E0;
+    box-shadow: 0 0 20px #AD02E0;
+}
+
+.defBtnReg:active {
+    background: #740994;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
+}
