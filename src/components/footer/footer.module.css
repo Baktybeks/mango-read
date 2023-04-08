@@ -1,0 +1,134 @@
+footer {
+    background: #FFFFFF;
+}
+
+.mainBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.logoBlock {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logoTitle
+ {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+}
+
+.logoTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+}
+
+.logoTitle > .title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.logoTitle > .subtitle {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.socialBlock .social_list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 32px;
+}
+
+.socialBlock .social_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.social_list span {
+    display: flex;
+    width: 24px;
+    height: 24px;
+}
+
+.socialBlock .social_list a,
+.footerLinksList,
+.reserved
+{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+}
+
+.socialBlock .social_list a {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    text-align: left;
+}
+
+.social_list .facebook {
+    background: url('../../assets/images/icon/icon_facebook.svg') center center no-repeat;
+}
+
+.social_list .instagram {
+    background: url('../../assets/images/icon/icon_instagram.svg') center center no-repeat;
+}
+
+.social_list .twitter {
+    background: url('../../assets/images/icon/icon_twitter.svg') center center no-repeat;
+}
+
+.map {
+    display: block;
+    filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.15));
+    border-radius: 20px;
+}
+
+.map>img {
+
+}
+
+.reserved,
+.footerLinksList .item a{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.footerBottom {
+    border-top: 1px solid #BBBBBB;
+    padding: 40px 0 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+.footerLinksList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.footerLinksList .item a{
+    text-decoration-line: underline;
+}
+
+
+

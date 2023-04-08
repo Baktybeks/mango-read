@@ -17,7 +17,7 @@ function Header() {
 
     return (
         <header>
-            <nav className="container">
+            <div className={`container ${classes.mainBlock}`}>
                 <div className={classes.logoBlock}>
                     <img src={logo} alt="logo"/>
                     <div className={classes.logoTitle}>
@@ -60,7 +60,7 @@ function Header() {
                         </>
                     }
                 </div>
-            </nav>
+            </div>
         </header>
     );
 }
