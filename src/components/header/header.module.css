@@ -1,5 +1,5 @@
 header {
-    background: #F3F3F3;
+    background: #FFFFFF;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
     height: 110px;
     display: flex;
@@ -22,14 +22,21 @@ nav {
     display: block;
 }
 
+.logoTitle,
+.searchBlock .search_input,
+.authBlock button,
+.profile {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+}
+
+
 .logoTitle {
     margin-left: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
 }
 
 .logoTitle > .title {
@@ -73,7 +80,7 @@ nav {
     border: 2px solid #AD02E0;
 }
 
-.searchBlock .search_input:focus+.search_img{
+.searchBlock .search_input:focus + .search_img {
     display: none;
 }
 
@@ -87,8 +94,6 @@ nav {
     font-size: 20px;
     line-height: 24px;
     color: #919191;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
 }
 
 .authBlock {
@@ -110,41 +115,72 @@ nav {
     font-size: 16px;
     line-height: 20px;
     text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
 }
 
-.defBtnLogin {
+.btnLogin {
     color: #000000;
 }
 
-.defBtnLogin:hover,
-.defBtnLogin:active {
+.btnLogin:hover,
+.btnLogin:active {
     color: #FFFFFF;
 }
 
-.defBtnLogin:hover {
+.btnLogin:hover,
+.btnReg:hover {
     background: #AD02E0;
     box-shadow: 0 0 20px #AD02E0;
 }
 
-.defBtnLogin:active {
-    background: #740994;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
-}
-
-.defBtnReg {
+.btnReg {
     background: #AD02E0;
     color: #FFFFFF;
 }
 
-.defBtnReg:hover {
-    background: #AD02E0;
+.btnReg:hover {
     border: 3px solid #AD02E0;
-    box-shadow: 0 0 20px #AD02E0;
 }
 
-.defBtnReg:active {
+.btnLogin:active,
+.btnReg:active {
     background: #740994;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
 }
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile .userName {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 35px;
+    text-align: right;
+    color: #000000;
+}
+
+
+.logedIn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 25px;
+}
+
+.logedIn .profileImg > img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logedIn .dropDown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+}
+

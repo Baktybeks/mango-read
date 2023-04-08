@@ -1,8 +1,12 @@
 import React from 'react';
 import classes from "./header.module.css";
 import logo from "../../assets/images/Logo.png"
+import arrow from "../../assets/images/icon/arrow_drop_down.svg"
+import profileImg from "../../assets/images/profilephoto.jpg"
 
 function Header() {
+    const isAuth = true
+
     return (
         <header>
             <nav className="container">
@@ -22,12 +26,31 @@ function Header() {
                     <span className={classes.search_img}></span>
                 </div>
                 <div className={classes.authBlock}>
-                    <button className={classes.defBtnLogin}>
-                        войти
-                    </button>
-                    <button className={classes.defBtnReg}>
-                        регистрация
-                    </button>
+                    {isAuth ?
+                        <div className={classes.profile}>
+                            <div className={classes.userName}>
+                                Alex Miller
+                            </div>
+                            <div className={classes.logedIn}>
+                                <div className={classes.profileImg}>
+                                    <img src={profileImg} alt="profileImg"/>
+                                </div>
+                                <div className={classes.dropDown}>
+                                    <img src={arrow} alt="arrow"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        :
+                        <>
+                            <button className={classes.btnLogin}>
+                                войти
+                            </button>
+                            <button className={classes.btnReg}>
+                                регистрация
+                            </button>
+                        </>
+                    }
                 </div>
             </nav>
         </header>
