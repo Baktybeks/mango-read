@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from "./header.module.css";
 import logo from "../../assets/images/Logo.png"
 import arrow from "../../assets/images/icon/arrow_drop_down.svg"
 import profileImg from "../../assets/images/profilephoto.jpg"
 
 function Header() {
-    const isAuth = true
+
+    const [isAuth, setIsAuth] = useState(false)
+
+    const logIn = () => {
+        setIsAuth(true)
+    }
+    const logOut = () => {
+        setIsAuth(false)
+    }
 
     return (
         <header>
@@ -27,7 +35,7 @@ function Header() {
                 </div>
                 <div className={classes.authBlock}>
                     {isAuth ?
-                        <div className={classes.profile}>
+                        <div onClick={logOut} className={classes.profile}>
                             <div className={classes.userName}>
                                 Alex Miller
                             </div>
@@ -43,7 +51,7 @@ function Header() {
                         </div>
                         :
                         <>
-                            <button className={classes.btnLogin}>
+                            <button onClick={logIn} className={classes.btnLogin}>
                                 войти
                             </button>
                             <button className={classes.btnReg}>
