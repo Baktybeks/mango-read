@@ -1,9 +1,10 @@
 import React from 'react';
+import classes from "./auth.module.sass";
 
 function Auth() {
     return (
-        <div>
-            <h1>Auth</h1>
+        <div className={classes.auth}>
+            
         </div>
     );
 }

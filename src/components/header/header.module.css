@@ -1,4 +1,9 @@
-header {
+.logo__title, .search__input, .auth__btn button {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+}
+
+.header {
     background: #FFFFFF;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
     height: 110px;
@@ -6,32 +11,23 @@ header {
     align-items: center;
 }
 
-.mainBlock {
+.header .main {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-
-.logoBlock {
+.logo {
     display: flex;
     align-items: center;
 }
 
-.logoBlock > img {
+.logo__img {
     display: block;
+    vertical-align: bottom;
 }
 
-.logoTitle,
-.searchBlock .search_input,
-.authBlock button,
-.profile {
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-}
-
-
-.logoTitle {
+.logo__title {
     margin-left: 5px;
     display: flex;
     flex-direction: column;
@@ -39,21 +35,21 @@ header {
     gap: 4px;
 }
 
-.logoTitle > .title {
+.logo__title .title {
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
     color: #000000;
 }
 
-.logoTitle > .subtitle {
+.logo__title .subtitle {
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     color: #878787;
 }
 
-.searchBlock {
+.search {
     width: 342px;
     display: flex;
     flex-direction: row;
@@ -65,26 +61,18 @@ header {
     border-radius: 8px;
 }
 
-.search_img {
-    display: block;
-    width: 24px;
-    height: 24px;
-    background: url('../../assets/images/icon/search.svg') no-repeat;
-}
-
-.searchBlock .search_input:focus {
-    color: #AD02E0;
-}
-
-.searchBlock:focus-within {
+.search:focus-within {
     border: 2px solid #AD02E0;
 }
 
-.searchBlock .search_input:focus + .search_img {
-    display: none;
+.search__img {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url("../../assets/images/icon/search.svg") no-repeat;
 }
 
-.searchBlock .search_input {
+.search__input {
     order: 2;
     border: none;
     width: 100%;
@@ -96,19 +84,70 @@ header {
     color: #919191;
 }
 
-.authBlock {
+.search__input:focus {
+    color: #AD02E0;
+}
+
+.search__input:focus + .search__img {
+    display: none;
+}
+
+.auth {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.authBlock button {
+.auth__user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.auth__user_name {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 35px;
+    text-align: right;
+    color: #000000;
+}
+
+.auth__user_login {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 25px;
+}
+
+.auth__user_login_img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.auth__user_login_dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+}
+
+.auth__btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.auth__btn button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 13px 38px;
-    gap: 10px;
     border-radius: 8px;
     border: 2px solid #AD02E0;
     font-weight: 400;
@@ -117,71 +156,34 @@ header {
     text-transform: uppercase;
 }
 
-.btnLogin {
+.auth__btn_login {
     color: #000000;
 }
 
-.btnLogin:hover,
-.btnLogin:active {
+.auth__btn_login:hover {
     color: #FFFFFF;
-}
-
-.btnLogin:hover,
-.btnReg:hover {
     background: #AD02E0;
     box-shadow: 0 0 20px #AD02E0;
 }
 
-.btnReg {
-    background: #AD02E0;
+.auth__btn_login:active {
     color: #FFFFFF;
-}
-
-.btnReg:hover {
-    border: 3px solid #AD02E0;
-}
-
-.btnLogin:active,
-.btnReg:active {
     background: #740994;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
 }
 
-.profile {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+.auth__btn_reg {
+    background: #AD02E0;
+    color: #FFFFFF;
 }
 
-.profile .userName {
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 35px;
-    text-align: right;
-    color: #000000;
+.auth__btn_reg:hover {
+    background: #AD02E0;
+    box-shadow: 0 0 20px #AD02E0;
+    border: 3px solid #AD02E0;
 }
 
-
-.logedIn {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-left: 25px;
+.auth__btn_reg:active {
+    background: #740994;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
 }
-
-.logedIn .profileImg > img {
-    display: block;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.logedIn .dropDown {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-}
-

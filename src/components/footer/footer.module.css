@@ -1,134 +1,103 @@
-footer {
-    background: #FFFFFF;
-}
+.logo__title {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal; }
 
-.mainBlock {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 0;
-}
+.social__list_item a, .bottom {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal; }
 
-.logoBlock {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+.footer {
+  background: #FFFFFF; }
 
-.logoTitle
- {
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-}
+.footer .main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0; }
 
-.logoTitle {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 9px;
-}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px; }
 
-.logoTitle > .title {
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 29px;
-    color: #000000;
-}
+.logo__title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px; }
 
-.logoTitle > .subtitle {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    color: #000000;
-}
+.logo__title > .title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000; }
 
-.socialBlock .social_list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0;
-    gap: 32px;
-}
+.logo__title > .subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000; }
 
-.socialBlock .social_item {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-}
+.social__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 32px; }
 
-.social_list span {
-    display: flex;
-    width: 24px;
-    height: 24px;
-}
+.social__list_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px; }
 
-.socialBlock .social_list a,
-.footerLinksList,
-.reserved
-{
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-}
+.social__list_item span {
+  display: flex;
+  width: 24px;
+  height: 24px; }
 
-.socialBlock .social_list a {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-    text-align: left;
-}
+.social__list_item a {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  text-align: left; }
 
-.social_list .facebook {
-    background: url('../../assets/images/icon/icon_facebook.svg') center center no-repeat;
-}
+.social__list .facebook {
+  background: url("../../assets/images/icon/icon_facebook.svg") center center no-repeat; }
 
-.social_list .instagram {
-    background: url('../../assets/images/icon/icon_instagram.svg') center center no-repeat;
-}
+.social__list .instagram {
+  background: url("../../assets/images/icon/icon_instagram.svg") center center no-repeat; }
 
-.social_list .twitter {
-    background: url('../../assets/images/icon/icon_twitter.svg') center center no-repeat;
-}
+.social__list .twitter {
+  background: url("../../assets/images/icon/icon_twitter.svg") center center no-repeat; }
 
 .map {
-    display: block;
-    filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.15));
-    border-radius: 20px;
-}
+  display: block;
+  filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.15));
+  border-radius: 20px; }
 
-.map>img {
+.bottom {
+  border-top: 1px solid #BBBBBB;
+  padding: 40px 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px; }
 
-}
+.bottom__reserved, .bottom__list {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000; }
 
-.reserved,
-.footerLinksList .item a{
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
-    color: #000000;
-}
+.bottom__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px; }
 
-.footerBottom {
-    border-top: 1px solid #BBBBBB;
-    padding: 40px 0 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-}
-
-.footerLinksList {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-}
-
-.footerLinksList .item a{
-    text-decoration-line: underline;
-}
-
-
-
+.bottom__list_item a {
+  text-decoration-line: underline;
+  color: #000000; }

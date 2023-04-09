@@ -1,0 +1,87 @@
+@import "../../assets/css/vars"
+
+.footer
+    background: #FFFFFF
+    .main
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 30px 0
+.logo
+    display: flex
+    align-items: center
+    gap: 5px
+    &__title
+        @extend %fontMontserrat
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        gap: 9px
+        & > .title
+            font-weight: 500
+            font-size: 24px
+            line-height: 29px
+            color: #000000
+        & > .subtitle
+            font-weight: 400
+            font-size: 20px
+            line-height: 24px
+            color: #000000
+
+.social__list
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    padding: 0
+    gap: 32px
+    &_item
+        display: flex
+        flex-direction: row
+        justify-content: flex-start
+        align-items: center
+        gap: 10px
+        span
+            display: flex
+            width: 24px
+            height: 24px
+        a
+            @extend %fontRoboto
+            font-weight: 600
+            font-size: 16px
+            line-height: 24px
+            color: #000000
+            text-align: left
+    .facebook
+        background: url('../../assets/images/icon/icon_facebook.svg') center center no-repeat
+    .instagram
+        background: url('../../assets/images/icon/icon_instagram.svg') center center no-repeat
+    .twitter
+        background: url('../../assets/images/icon/icon_twitter.svg') center center no-repeat
+
+.map 
+    display: block
+    filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.15))
+    border-radius: 20px
+
+
+.bottom
+    border-top: 1px solid #BBBBBB
+    padding: 40px 0 30px
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 32px
+    @extend %fontRoboto
+    &__reserved, &__list
+        font-weight: 400
+        font-size: 14px
+        line-height: 21px
+        color: #000000
+    &__list
+        display: flex
+        justify-content: center
+        align-items: center
+        gap: 24px
+        &_item a
+            text-decoration-line: underline
+            color: #000000

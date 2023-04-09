@@ -1,28 +1,28 @@
 import React from 'react';
-import classes from "./footer.module.css";
+import classes from "./footer.module.sass";
 import logo_footer from "../../assets/images/Logo_footer.png"
 import Ymap from "../map/Ymap";
 
 function Footer() {
     return (
-        <footer>
-            <div className={`container ${classes.mainBlock}`}>
-                <div className={classes.logoBlock}>
-                    <img src={logo_footer} alt="logo"/>
-                    <div className={classes.logoTitle}>
+        <footer className={classes.footer}>
+            <div className={`container ${classes.main}`}>
+                <div className={classes.logo}>
+                    <img className={classes.logo__img} src={logo_footer} alt="logo"/>
+                    <div className={classes.logo__title}>
                         <div className={classes.title}>MangoRead</div>
                         <div className={classes.subtitle}>Читай мангу с нами</div>
                     </div>
                 </div>
-                <div className={classes.socialBlock}>
-                    <ul className={classes.social_list}>
-                        <li className={classes.social_item}>
+                <div className={classes.social}>
+                    <ul className={classes.social__list}>
+                        <li className={classes.social__list_item}>
                             <span className={classes.facebook}></span><a href="#">Link One</a>
                         </li>
-                        <li className={classes.social_item}>
+                        <li className={classes.social__list_item}>
                             <span className={classes.instagram}/><a href="#">Link Two</a>
                         </li>
-                        <li className={classes.social_item}>
+                        <li className={classes.social__list_item}>
                             <span className={classes.twitter}/><a href="#">Link Three</a>
                         </li>
                     </ul>
@@ -31,16 +31,16 @@ function Footer() {
                     <Ymap/> {/*google map api платная*/}
                 </div>
             </div>
-            <div className={classes.footerBottom}>
-                <div className={classes.reserved}>©2022, All right reserved.</div>
-                <ul className={`${classes.footerLinksList}`}>
-                    <li className={classes.item}>
+            <div className={classes.bottom}>
+                <div className={classes.bottom__reserved}>©2022, All right reserved.</div>
+                <ul className={`${classes.bottom__list}`}>
+                    <li className={classes.bottom__list_item}>
                         <a href="#">Privacy Policy</a>
                     </li>
-                    <li className={classes.item}>
+                    <li className={classes.bottom__list_item}>
                         <a href="#">Terms of Service</a>
                     </li>
-                    <li className={classes.item}>
+                    <li className={classes.bottom__list_item}>
                         <a href="#">Cookies Settings</a>
                     </li>
                 </ul>
