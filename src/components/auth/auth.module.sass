@@ -1,3 +1,79 @@
+%fontMontserrat
+    font-family: 'Montserrat', sans-serif
+    font-style: normal
+    font-weight: 400
 .auth
-  color: red
-  background-color: #AD02E0
+    margin: 0 auto
+    width: 603px
+    background: #FFFFFF
+    border-radius: 30px
+    &__exit
+        margin: 31px 0 0 523px
+        vertical-align: bottom
+    &__title
+        padding-top: 12px
+        margin: 0 auto
+        width: 500px
+        display: flex
+        gap: 32px
+        border-bottom: 2px solid #878787
+        .login, .reg
+            @extend %fontMontserrat
+            font-size: 24px
+            line-height: 35px
+            color: #000000
+            //border-bottom: 5px solid #AD02E0
+            cursor: pointer
+            &.active
+                border-bottom: 5px solid #AD02E0
+
+    &__form
+        width: 500px
+        margin: 0 auto
+        display: flex
+        flex-direction: column
+        gap: 30px
+        padding: 45px 0 50px
+        .username, .password
+            @extend %fontMontserrat
+            padding: 0 10px
+            gap: 10px
+            width: 100%
+            height: 52px
+            border: 1px solid #000000
+            border-radius: 8px
+            font-size: 24px
+            line-height: 35px
+            color: #878787
+        .checkbox
+            @extend %fontMontserrat
+            display: flex
+            flex-direction: row
+            gap: 10px
+            input[type="checkbox"]
+                width: 35px
+                height: 35px
+                border: 2px solid #AD02E0
+                border-radius: 5px
+                accent-color: #2FE09B
+                color: white
+            label
+                font-size: 24px
+                line-height: 35px
+                color: #878787
+        & > button
+            @extend %fontMontserrat
+            height: 50px
+            background: #AD02E0
+            border-radius: 8px
+            font-size: 16px
+            line-height: 20px
+            text-transform: uppercase
+            color: #FFFFFF
+
+
+
+
+
+
+
