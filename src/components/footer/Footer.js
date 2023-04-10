@@ -19,13 +19,13 @@ function Footer() {
                 <div className={classes.social}>
                     <ul className={classes.social__list}>
                         <li className={classes.social__list_item}>
-                            <span className={classes.facebook}></span><a href="#/">Link One</a>
+                            <span className={classes.facebook}></span><Link to="#">Link One</Link>
                         </li>
                         <li className={classes.social__list_item}>
-                            <span className={classes.instagram}></span><a href="#/">Link Two</a>
+                            <span className={classes.instagram}></span><Link to="#">Link Two</Link>
                         </li>
                         <li className={classes.social__list_item}>
-                            <span className={classes.twitter}></span><a href="#/">Link Three</a>
+                            <span className={classes.twitter}></span><Link to="#">Link Three</Link>
                         </li>
                     </ul>
                 </div>
@@ -37,13 +37,13 @@ function Footer() {
                 <div className={classes.bottom__reserved}>©2022, All right reserved.</div>
                 <ul className={`${classes.bottom__list}`}>
                     <li className={classes.bottom__list_item}>
-                        <a href="#/">Privacy Policy</a>
+                        <Link to="auth">Privacy Policy</Link>
                     </li>
                     <li className={classes.bottom__list_item}>
-                        <a href="#/">Terms of Service</a>
+                        <Link to="#">Terms of Service</Link>
                     </li>
                     <li className={classes.bottom__list_item}>
-                        <a href="#/">Cookies Settings</a>
+                        <Link to="#">Cookies Settings</Link>
                     </li>
                 </ul>
             </div>
