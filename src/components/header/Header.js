@@ -3,17 +3,36 @@ import classes from "./header.module.sass";
 import logo from "../../assets/images/Logo.png"
 import arrow from "../../assets/images/icon/arrow_drop_down.svg"
 import profileImg from "../../assets/images/profilephoto.jpg"
+import Modal from "../modal/Modal";
+import Auth from "../auth/Auth";
 
 function Header() {
 
     const [isAuth, setIsAuth] = useState(false)
+    const [loginBtn, setLoginBtn] = useState(false)
+    const [modalActive, setModalActive] = useState(false)
 
-    const logIn = () => {
-        setIsAuth(true)
+    const login = () => {
+        setModalActive(true)
+        setLoginBtn(true)
     }
+    const reg = () => {
+        setModalActive(true)
+        setLoginBtn(false)
+    }
+
+    // const close = () => {
+    //     setModalActive(false)
+    // }
+
+
     const logOut = () => {
         setIsAuth(false)
     }
+
+
+
+
 
     return (
         <header className={classes.header}>
@@ -48,16 +67,19 @@ function Header() {
                         </div>
                         :
                         <div className={classes.auth__btn}>
-                            <button className={classes.auth__btn_login} onClick={logIn}>
+                            <button className={classes.auth__btn_login} onClick={login}>
                                 войти
                             </button>
-                            <button className={classes.auth__btn_reg}>
+                            <button className={classes.auth__btn_reg} onClick={reg}>
                                 регистрация
                             </button>
                         </div>
                     }
                 </div>
             </div>
+            <Modal active={modalActive} setActive={setModalActive}>
+                <Auth login={loginBtn}/>
+            </Modal>
         </header>
     );
 }

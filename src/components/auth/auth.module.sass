@@ -7,6 +7,7 @@
     width: 603px
     background: #FFFFFF
     border-radius: 30px
+
     &__exit
         margin: 31px 0 0 523px
         vertical-align: bottom
@@ -16,64 +17,123 @@
         width: 500px
         display: flex
         gap: 32px
-        border-bottom: 2px solid #878787
         .login, .reg
             @extend %fontMontserrat
             font-size: 24px
             line-height: 35px
             color: #000000
-            //border-bottom: 5px solid #AD02E0
             cursor: pointer
             &.active
                 border-bottom: 5px solid #AD02E0
-
+                z-index: 1
+    &__divider
+        position: relative
+        margin: 0 auto
+        &>div
+            position: absolute
+            background-color: #878787
+            border-radius: 2px
+            width: 500px
+            height: 2px
+            left: 50%
+            top: -2.5px
+            transform: translate(-50%)
     &__form
         width: 500px
         margin: 0 auto
         display: flex
         flex-direction: column
-        gap: 30px
-        padding: 45px 0 50px
-        .username, .password
-            @extend %fontMontserrat
-            padding: 0 10px
-            gap: 10px
-            width: 100%
-            height: 52px
-            border: 1px solid #000000
-            border-radius: 8px
-            font-size: 24px
-            line-height: 35px
-            color: #878787
-        .checkbox
-            @extend %fontMontserrat
+        align-items: center
+        &.login
+            padding-bottom: 50px
+        &.reg
+            padding-bottom: 58px
+        &_img
+            margin-top: 40px
             display: flex
-            flex-direction: row
-            gap: 10px
-            input[type="checkbox"]
-                width: 35px
-                height: 35px
-                border: 2px solid #AD02E0
-                border-radius: 5px
-                accent-color: #2FE09B
-                color: white
+            align-items: center
+            flex-direction: column
+            justify-content: center
+            img
+                width: 181px
+                height: 181px
+                border-radius: 50%
+                object-fit: cover
+            input[type="file"]
+                display: none
             label
+                @extend %fontMontserrat
+                margin-top: 21px
+                font-size: 16px
+                line-height: 20px
+                text-transform: uppercase
+                color: #000000
+        &_text_box
+            width: 100%
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: 30px
+            &.login
+                margin-top: 45px
+            &.reg
+                margin-top: 40px
+            .text
+                @extend %fontMontserrat
+                padding: 0 10px
+                gap: 10px
+                width: 100%
+                height: 52px
+                border: 1px solid #000000
+                border-radius: 8px
                 font-size: 24px
                 line-height: 35px
-                color: #878787
-        & > button
-            @extend %fontMontserrat
-            height: 50px
-            background: #AD02E0
-            border-radius: 8px
-            font-size: 16px
-            line-height: 20px
-            text-transform: uppercase
-            color: #FFFFFF
-
-
-
-
-
-
-
+                color: #000000
+                &::placeholder
+                    color: #878787
+                &:focus
+                    outline: 1px solid #AD02E0
+            .checkbox
+                @extend %fontMontserrat
+                width: 100%
+                &__label
+                    gap: 10px
+                    display: flex
+                    cursor: pointer
+                    &_title
+                        font-size: 24px
+                        line-height: 35px
+                        color: #878787
+                    &_input
+                        width: 100px
+                        display: none
+                &__box
+                    width: 35px
+                    height: 35px
+                    border: 2px solid #AD02E0
+                    border-radius: 5px
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    &_tick
+                        display: block
+                        width: 27px
+                        height: 19px
+                        background-image: url("../../assets/images/icon/tick.svg")
+                        background-repeat: no-repeat
+                &__box.checked
+                    background-color: #AD02E0
+            & > button
+                @extend %fontMontserrat
+                width: 100%
+                height: 50px
+                background: #AD02E0
+                border-radius: 8px
+                font-size: 16px
+                line-height: 20px
+                text-transform: uppercase
+                color: #FFFFFF
+        &_text.login
+            margin-top: 45px
+        &_text.reg
+            margin-top: 40px
