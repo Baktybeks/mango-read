@@ -1,4 +1,4 @@
-.logo__title, .search__input, .auth__btn button {
+.logo__title, .search__input, .auth__user_name, .auth__btn button {
   font-family: 'Montserrat', sans-serif;
   font-style: normal; }
 
@@ -126,7 +126,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 13px 38px;
+  padding: 13px 39px;
   border-radius: 8px;
   border: 2px solid #AD02E0;
   font-weight: 400;

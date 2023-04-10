@@ -11,7 +11,8 @@
 
 .auth__exit {
   margin: 31px 0 0 523px;
-  vertical-align: bottom; }
+  vertical-align: bottom;
+  cursor: pointer; }
 
 .auth__title {
   padding-top: 12px;
@@ -78,7 +79,8 @@
   font-size: 16px;
   line-height: 20px;
   text-transform: uppercase;
-  color: #000000; }
+  color: #000000;
+  cursor: pointer; }
 
 .auth__form_text_box {
   width: 100%;
@@ -154,7 +156,8 @@
   font-size: 16px;
   line-height: 20px;
   text-transform: uppercase;
-  color: #FFFFFF; }
+  color: #FFFFFF;
+  cursor: pointer; }
 
 .auth__form_text.login {
   margin-top: 45px; }

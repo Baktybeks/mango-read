@@ -11,7 +11,9 @@ function Auth({login}) {
         setMyCheck(event.target.checked);
     }
 
-
+    // const close = () => {
+    //     setModalActive(false)
+    // }
 
     return (
         <div className={classes.auth}>

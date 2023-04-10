@@ -5,6 +5,8 @@ import arrow from "../../assets/images/icon/arrow_drop_down.svg"
 import profileImg from "../../assets/images/profilephoto.jpg"
 import Modal from "../modal/Modal";
 import Auth from "../auth/Auth";
+import {links} from "../../links/links";
+import {Link} from "react-router-dom";
 
 function Header() {
 
@@ -15,35 +17,27 @@ function Header() {
     const login = () => {
         setModalActive(true)
         setLoginBtn(true)
+        setIsAuth(true)
     }
     const reg = () => {
         setModalActive(true)
         setLoginBtn(false)
     }
 
-    // const close = () => {
-    //     setModalActive(false)
-    // }
-
-
     const logOut = () => {
         setIsAuth(false)
     }
 
-
-
-
-
     return (
         <header className={classes.header}>
             <div className={`container ${classes.main}`}>
-                <div className={classes.logo}>
+                <Link to={links.base} className={classes.logo}>
                     <img src={logo} alt="logo" className={classes.logo__img}/>
                     <div className={classes.logo__title}>
                         <div className={classes.title}>MangoRead</div>
                         <div className={classes.subtitle}>Читай мангу с нами</div>
                     </div>
-                </div>
+                </Link>
                 <div className={classes.search}>
                     <input
                         className={classes.search__input}
