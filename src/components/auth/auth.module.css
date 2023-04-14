@@ -35,7 +35,7 @@
   position: relative;
   margin: 0 auto; }
 
-.auth__divider > div {
+.auth__divider_line {
   position: absolute;
   background-color: #878787;
   border-radius: 2px;

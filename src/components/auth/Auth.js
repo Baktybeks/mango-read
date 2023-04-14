@@ -2,32 +2,35 @@ import React, {useState} from 'react';
 import classes from "./auth.module.sass";
 import profileImg from "../../assets/images/profilephoto.jpg"
 import exit from "../../assets/images/exit.svg"
+import {useDispatch} from "react-redux";
+import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice";
 
 function Auth({login}) {
 
     let [myCheck, setMyCheck] = useState(false)
 
+    const dispatch = useDispatch()
+
     const handleChange = (event) => {
         setMyCheck(event.target.checked);
     }
 
-    // const close = () => {
-    //     setModalActive(false)
-    // }
-
     return (
         <div className={classes.auth}>
-            <img className={classes.auth__exit} src={exit} alt="exit"/>
+            <img className={classes.auth__exit} src={exit} alt="exit" onClick={() => {
+                dispatch(setModalActive(false))
+            }}
+            />
             <div className={classes.auth__title}>
                 <div
                     className={login ? `${classes.login} ${classes.active}` : `${classes.login}`}
-
+                    onClick={() => {dispatch(setLoginOrReg(true))}}
                 >
                     Вход
                 </div>
                 <div
                     className={!login ? `${classes.reg} ${classes.active}` : `${classes.reg}`}
-
+                    onClick={() => {dispatch(setLoginOrReg(false))}}
                 >
                     Регистрация
                 </div>
@@ -81,7 +84,8 @@ function Auth({login}) {
                                 id="add_img"/>
                             <label htmlFor="add_img">дОБАВИТЬ ФОТО</label>
                         </div>
-                        <div className={login ? `${classes.auth__form_text_box} ${classes.login}` : `${classes.auth__form_text_box} ${classes.reg}`}>
+                        <div
+                            className={login ? `${classes.auth__form_text_box} ${classes.login}` : `${classes.auth__form_text_box} ${classes.reg}`}>
 
                             <input
                                 className={classes.text}

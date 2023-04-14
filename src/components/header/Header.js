@@ -7,21 +7,25 @@ import Modal from "../modal/Modal";
 import Auth from "../auth/Auth";
 import {links} from "../../links/links";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice";
 
 function Header() {
 
     const [isAuth, setIsAuth] = useState(false)
-    const [loginBtn, setLoginBtn] = useState(false)
-    const [modalActive, setModalActive] = useState(false)
+    const dispatch = useDispatch()
+    const {loginOrReg, modalActive} = useSelector (state => state.usersReducer)
+    console.log('loginOrReg',loginOrReg)
+    console.log('modalActive',modalActive)
 
     const login = () => {
-        setModalActive(true)
-        setLoginBtn(true)
+        dispatch(setModalActive(true))
+        dispatch(setLoginOrReg(true))
         setIsAuth(true)
     }
     const reg = () => {
-        setModalActive(true)
-        setLoginBtn(false)
+        dispatch(setModalActive(true))
+        dispatch(setLoginOrReg(false))
     }
 
     const logOut = () => {
@@ -71,8 +75,8 @@ function Header() {
                     }
                 </div>
             </div>
-            <Modal active={modalActive} setActive={setModalActive}>
-                <Auth login={loginBtn}/>
+            <Modal active={modalActive}>
+                <Auth login={loginOrReg}/>
             </Modal>
         </header>
     );
