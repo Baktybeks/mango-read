@@ -4,24 +4,22 @@ const mangaSlice = createSlice({
     name: 'mangaSlice',
     initialState: {
         typeManga: [],
-        genreManga: []
+        genreManga: [],
+        manga: true
     },
     reducers: {
         setTypeManga: (state, action) => {
             state.typeManga = action.payload
         },
-        setClearTypeManga: (state) => {
-            state.typeManga = []
-        },
         setGenreManga: (state, action) => {
             state.genreManga = action.payload
         },
-        setClearGenreManga: (state) => {
-            state.genreManga = []
+        setManga: (state,action) => {
+            state.manga = action.payload
         }
     }
 })
 
-export const {setTypeManga, setClearTypeManga, setGenreManga, setClearGenreManga} = mangaSlice.actions
+export const {setTypeManga, setManga, setGenreManga} = mangaSlice.actions
 
 export default mangaSlice.reducer

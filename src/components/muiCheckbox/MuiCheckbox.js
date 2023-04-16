@@ -27,11 +27,11 @@ function MuiCheckbox({muiCheckbox, manga}) {
 
     const {typeManga, genreManga} = useSelector(state => state.mangaReducer)
 
-    // console.log("type", typeManga)
-    // console.log("genre", genreManga)
+    console.log("type", typeManga)
+    console.log("genre", genreManga)
 
     const handleSkillChange = (event) => {
-        if (manga === "type") {
+        if (manga) {
             dispatch(setTypeManga(event.target.checked))
             const index = typeManga.indexOf(event.target.value)
             if (index === -1) {
@@ -62,7 +62,7 @@ function MuiCheckbox({muiCheckbox, manga}) {
                                 control={<Checkbox
                                     sx={checkboxStyle}
                                     value={checkBox}
-                                    checked={(manga === "type" ? typeManga : genreManga).includes(checkBox)}
+                                    checked={(manga ? typeManga : genreManga).includes(checkBox)}
                                     onChange={handleSkillChange}/>}
                             />
                         )}

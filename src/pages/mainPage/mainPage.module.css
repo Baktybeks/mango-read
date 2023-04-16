@@ -51,7 +51,8 @@
   margin-left: 15px;
   font-size: 24px;
   line-height: 35px;
-  color: #000000; }
+  color: #000000;
+  overflow-y: scroll; }
 
 .main__aside_years {
   display: flex;
