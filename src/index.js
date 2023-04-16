@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-import './assets/css/core.css'
+import './assets/css/core.sass'
 import './assets/fonts/roboto/stylesheet.css'
 import './assets/fonts/montserrat/stylesheet.css'
 

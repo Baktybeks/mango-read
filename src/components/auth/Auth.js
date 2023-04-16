@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import classes from "./auth.module.sass";
+import classes from "./auth.module.css";
 import profileImg from "../../assets/images/profilephoto.jpg"
 import exit from "../../assets/images/exit.svg"
 import {useDispatch} from "react-redux";

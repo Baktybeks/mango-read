@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "./modal.module.sass";
+import classes from "./modal.module.css";
 import {useDispatch} from "react-redux";
 import {setModalActive} from "../../store/slices/usersSlice";
 

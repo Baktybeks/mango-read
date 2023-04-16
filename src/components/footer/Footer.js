@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "./footer.module.sass";
+import classes from "./footer.module.css";
 import logo_footer from "../../assets/images/Logo_footer.png"
 import Ymap from "../map/Ymap";
 import {Link} from "react-router-dom";

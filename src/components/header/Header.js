@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import classes from "./header.module.sass";
+import classes from "./header.module.css";
 import logo from "../../assets/images/Logo.png"
 import arrow from "../../assets/images/icon/arrow_drop_down.svg"
 import profileImg from "../../assets/images/profilephoto.jpg"
@@ -15,8 +15,6 @@ function Header() {
     const [isAuth, setIsAuth] = useState(false)
     const dispatch = useDispatch()
     const {loginOrReg, modalActive} = useSelector (state => state.usersReducer)
-    console.log('loginOrReg',loginOrReg)
-    console.log('modalActive',modalActive)
 
     const login = () => {
         dispatch(setModalActive(true))
