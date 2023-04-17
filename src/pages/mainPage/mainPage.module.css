@@ -1,4 +1,4 @@
-.main__aside_genre, .main__aside_type, .main__aside_years .input, .main__aside_btn .btn {
+.main__aside_manga_type, .main__aside_manga_genre, .main__aside_types, .main__aside_years .input, .main__aside_btn .btn {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400; }
@@ -20,7 +20,7 @@
   gap: 33px;
   position: relative; }
 
-.main__aside_genre {
+.main__aside_manga_type {
   margin-top: 20px;
   width: 100%;
   padding: 10px 15px;
@@ -30,15 +30,15 @@
   align-items: center;
   font-size: 24px;
   line-height: 35px;
-  color: #000000; }
-
-.main__aside_genre .nav {
-  display: flex;
-  align-items: center;
-  gap: 17px;
+  color: #000000;
   cursor: pointer; }
 
-.main__aside_genre .nav_arrow_right {
+.main__aside_manga_type .nav {
+  display: flex;
+  align-items: center;
+  gap: 17px; }
+
+.main__aside_manga_type .nav_arrow_right {
   display: block;
   width: 15px;
   height: 23px;
@@ -47,12 +47,43 @@
   background-repeat: no-repeat;
   vertical-align: bottom; }
 
-.main__aside_type {
-  margin-left: 15px;
+.main__aside_manga_genre {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   font-size: 24px;
   line-height: 35px;
   color: #000000;
-  overflow-y: scroll; }
+  cursor: pointer; }
+
+.main__aside_manga_genre .nav {
+  display: flex;
+  align-items: center;
+  gap: 17px; }
+
+.main__aside_manga_genre .nav_arrow_left {
+  display: block;
+  width: 15px;
+  height: 23px;
+  color: #878787;
+  background-image: url("../../assets/images/icon/arrow_left.svg");
+  background-repeat: no-repeat;
+  vertical-align: bottom; }
+
+.main__aside_types {
+  margin-left: 15px;
+  font-size: 24px;
+  line-height: 35px;
+  color: #000000; }
+
+.main__aside_types.type_true {
+  overflow-y: scroll;
+  padding-left: 5px;
+  height: 500px; }
 
 .main__aside_years {
   display: flex;
@@ -60,6 +91,9 @@
   justify-content: flex-start;
   margin-left: 15px;
   gap: 10px; }
+
+.main__aside_years.type_true {
+  display: none; }
 
 .main__aside_years .input {
   display: flex;

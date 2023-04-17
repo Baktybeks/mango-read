@@ -1,7 +1,7 @@
-import React from 'react';
-import classes from "./modal.module.css";
-import {useDispatch} from "react-redux";
-import {setModalActive} from "../../store/slices/usersSlice";
+import React from 'react'
+import classes from "./modal.module.css"
+import {useDispatch} from "react-redux"
+import {setModalActive} from "../../store/slices/usersSlice"
 
 function Modal({active, children}) {
     const dispatch = useDispatch()
@@ -13,7 +13,7 @@ function Modal({active, children}) {
                 {children}
             </div>
         </div>
-    );
+    )
 }
 
-export default Modal;
+export default Modal

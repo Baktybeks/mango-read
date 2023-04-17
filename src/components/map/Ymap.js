@@ -1,6 +1,6 @@
-import React from 'react';
-import {YMaps, Map} from '@pbe/react-yandex-maps';
-import classes from "./ymap.module.css";
+import React from 'react'
+import {YMaps, Map} from '@pbe/react-yandex-maps'
+import classes from "./ymap.module.css"
 
 function YMap() {
     return (
@@ -13,7 +13,7 @@ function YMap() {
                 />
             </YMaps>
         </div>
-    );
+    )
 }
 
-export default YMap;
+export default YMap

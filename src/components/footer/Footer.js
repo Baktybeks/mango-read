@@ -1,9 +1,9 @@
-import React from 'react';
-import classes from "./footer.module.css";
+import React from 'react'
+import classes from "./footer.module.css"
 import logo_footer from "../../assets/images/Logo_footer.png"
-import Ymap from "../map/Ymap";
-import {Link} from "react-router-dom";
-import {links} from "../../links/links";
+import Ymap from "../map/Ymap"
+import {Link} from "react-router-dom"
+import {links} from "../../links/links"
 
 function Footer() {
     return (
@@ -48,7 +48,7 @@ function Footer() {
                 </ul>
             </div>
         </footer>
-    );
+    )
 }
 
-export default Footer;
+export default Footer

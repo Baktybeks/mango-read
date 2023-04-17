@@ -1,18 +1,31 @@
-import React, {useState} from 'react';
-import classes from "./auth.module.css";
+import React, {useState} from 'react'
+import classes from "./auth.module.css"
 import profileImg from "../../assets/images/profilephoto.jpg"
 import exit from "../../assets/images/exit.svg"
-import {useDispatch} from "react-redux";
-import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice";
+import {useDispatch} from "react-redux"
+import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice"
+import {signInApi} from "../../axios/usersApi"
 
 function Auth({login}) {
-
-    let [myCheck, setMyCheck] = useState(false)
-
     const dispatch = useDispatch()
 
+    const [myCheck, setMyCheck] = useState(false)
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
     const handleChange = (event) => {
-        setMyCheck(event.target.checked);
+        setMyCheck(event.target.checked)
+    }
+
+    const isFormValid = () => username && password
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        if (isFormValid()) {
+            dispatch(signInApi(username, password, myCheck))
+        } else {
+            alert('Введите все данные')
+        }
     }
 
     return (
@@ -24,13 +37,17 @@ function Auth({login}) {
             <div className={classes.auth__title}>
                 <div
                     className={login ? `${classes.login} ${classes.active}` : `${classes.login}`}
-                    onClick={() => {dispatch(setLoginOrReg(true))}}
+                    onClick={() => {
+                        dispatch(setLoginOrReg(true))
+                    }}
                 >
                     Вход
                 </div>
                 <div
                     className={!login ? `${classes.reg} ${classes.active}` : `${classes.reg}`}
-                    onClick={() => {dispatch(setLoginOrReg(false))}}
+                    onClick={() => {
+                        dispatch(setLoginOrReg(false))
+                    }}
                 >
                     Регистрация
                 </div>
@@ -41,7 +58,8 @@ function Auth({login}) {
             {
                 login
                     ?
-                    <form className={`${classes.auth__form} ${classes.login}`}>
+                    <form className={`${classes.auth__form} ${classes.login}`}
+                          onSubmit={submitHandler}>
                         <div
                             className={login ? `${classes.auth__form_text_box} ${classes.login}` : `${classes.auth__form_text_box} ${classes.reg}`}>
                             <input
@@ -49,12 +67,16 @@ function Auth({login}) {
                                 type="text"
                                 name="username"
                                 placeholder="Username"
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
                             />
                             <input
                                 className={classes.text}
                                 type="password"
                                 name="password"
                                 placeholder="Password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
                             />
                             <div className={classes.checkbox}>
                                 <label htmlFor="checkbox" className={classes.checkbox__label}>
@@ -70,7 +92,7 @@ function Auth({login}) {
                                     <div className={classes.checkbox__label_title}>Запомнить меня</div>
                                 </label>
                             </div>
-                            <button type="button">Вход</button>
+                            <button type="submit">Вход</button>
                         </div>
                     </form>
                     :
@@ -111,7 +133,7 @@ function Auth({login}) {
             }
 
         </div>
-    );
+    )
 }
 
-export default Auth;
+export default Auth

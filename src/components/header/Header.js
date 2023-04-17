@@ -1,34 +1,32 @@
-import React, {useState} from 'react';
-import classes from "./header.module.css";
+import React from 'react'
+import classes from "./header.module.css"
 import logo from "../../assets/images/Logo.png"
 import arrow from "../../assets/images/icon/arrow_drop_down.svg"
-import profileImg from "../../assets/images/profilephoto.jpg"
-import Modal from "../modal/Modal";
-import Auth from "../auth/Auth";
-import {links} from "../../links/links";
-import {Link} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice";
+import Modal from "../modal/Modal"
+import Auth from "../auth/Auth"
+import {links} from "../../links/links"
+import {Link} from "react-router-dom"
+import {useDispatch, useSelector} from "react-redux"
+import {setLoginOrReg, setLogout, setModalActive} from "../../store/slices/usersSlice"
 
 function Header() {
 
-    const [isAuth, setIsAuth] = useState(false)
+    const {isAuth, user} = useSelector(state => state.usersReducer)
+
     const dispatch = useDispatch()
+
     const {loginOrReg, modalActive} = useSelector (state => state.usersReducer)
 
     const login = () => {
         dispatch(setModalActive(true))
         dispatch(setLoginOrReg(true))
-        setIsAuth(true)
     }
     const reg = () => {
         dispatch(setModalActive(true))
         dispatch(setLoginOrReg(false))
     }
 
-    const logOut = () => {
-        setIsAuth(false)
-    }
+    const logOut = () => dispatch(setLogout())
 
     return (
         <header className={classes.header}>
@@ -50,13 +48,13 @@ function Header() {
                 </div>
                 <div className={classes.auth}>
                     {isAuth ?
-                        <div onClick={logOut} className={classes.auth__user}>
+                        <div className={classes.auth__user}>
                             <div className={classes.auth__user_name}>
-                                Alex Miller
+                                {user.username}
                             </div>
                             <div className={classes.auth__user_login}>
-                                <img src={profileImg} alt="profileImg" className={classes.auth__user_login_img}/>
-                                <div className={classes.auth__user_login_dropdown}>
+                                <img src={user.image_file} alt="profileImg" className={classes.auth__user_login_img}/>
+                                <div className={classes.auth__user_login_dropdown} onClick={logOut}>
                                     <img src={arrow} alt="arrow"/>
                                 </div>
                             </div>
@@ -77,7 +75,7 @@ function Header() {
                 <Auth login={loginOrReg}/>
             </Modal>
         </header>
-    );
+    )
 }
 
-export default Header;
+export default Header

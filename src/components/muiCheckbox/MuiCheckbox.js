@@ -1,16 +1,15 @@
-import React from 'react';
+import React from 'react'
 import {
     Box,
     FormControlLabel,
     Checkbox,
     FormControl,
-    FormLabel,
     FormGroup,
     Typography,
     createTheme
-} from "@mui/material";
-import {useDispatch, useSelector} from "react-redux";
-import {setGenreManga, setTypeManga} from "../../store/slices/mangaSlice";
+} from "@mui/material"
+import {useDispatch, useSelector} from "react-redux"
+import {setGenreManga, setTypeManga} from "../../store/slices/mangaSlice"
 
 const theme = createTheme({typography: {fontFamily: 'Montserrat', fontSize: '24px'}})
 
@@ -27,8 +26,8 @@ function MuiCheckbox({muiCheckbox, manga}) {
 
     const {typeManga, genreManga} = useSelector(state => state.mangaReducer)
 
-    console.log("type", typeManga)
-    console.log("genre", genreManga)
+    // console.log("type", typeManga)
+    // console.log("genre", genreManga)
 
     const handleSkillChange = (event) => {
         if (manga) {
@@ -54,14 +53,15 @@ function MuiCheckbox({muiCheckbox, manga}) {
         <Box>
             <Box>
                 <FormControl>
-                    <FormLabel theme={theme} sx={{mb: "10px"}}>Тип</FormLabel>
+                    {/*<FormLabel theme={theme} sx={{mb: "10px"}}>Тип</FormLabel>*/}
                     <FormGroup sx={{gap: "10px"}}>
-                        {muiCheckbox.map(checkBox =>
+                        {muiCheckbox.map((checkBox) =>
                             <FormControlLabel
                                 label={<Typography theme={theme}>{checkBox}</Typography>}
                                 control={<Checkbox
                                     sx={checkboxStyle}
                                     value={checkBox}
+                                    key={checkBox}
                                     checked={(manga ? typeManga : genreManga).includes(checkBox)}
                                     onChange={handleSkillChange}/>}
                             />
@@ -70,10 +70,10 @@ function MuiCheckbox({muiCheckbox, manga}) {
                 </FormControl>
             </Box>
         </Box>
-    );
+    )
 }
 
-export default MuiCheckbox;
+export default MuiCheckbox
 
 // defaultChecked
 // sx={{
@@ -99,5 +99,5 @@ export default MuiCheckbox;
 //                 />
 //             </Box>
 //         </Box>
-//     );
+//     )
 // }

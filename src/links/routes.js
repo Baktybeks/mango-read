@@ -1,9 +1,9 @@
-import {links} from "./links";
-import {Navigate} from "react-router-dom";
+import {links} from "./links"
+import {Navigate} from "react-router-dom"
 
-import MainPage from "../pages/mainPage/MainPage";
-import InfoPage from "../pages/infoPage/InfoPage";
-import Auth from "../components/auth/Auth";
+import MainPage from "../pages/mainPage/MainPage"
+import InfoPage from "../pages/infoPage/InfoPage"
+import Auth from "../components/auth/Auth"
 
 
 export const publicRoutes = [
