@@ -6,7 +6,7 @@ import {
     FormControl,
     FormGroup,
     Typography,
-    createTheme
+    createTheme, FormLabel
 } from "@mui/material"
 import {useDispatch, useSelector} from "react-redux"
 import {setGenreManga, setTypeManga} from "../../store/slices/mangaSlice"
@@ -29,31 +29,28 @@ function MuiCheckbox({muiCheckbox, manga}) {
     // console.log("type", typeManga)
     // console.log("genre", genreManga)
 
-    const handleSkillChange = (event) => {
-        if (manga) {
-            dispatch(setTypeManga(event.target.checked))
-            const index = typeManga.indexOf(event.target.value)
-            if (index === -1) {
-                dispatch(setTypeManga([...typeManga, event.target.value]))
-            } else {
-                dispatch(setTypeManga(typeManga.filter(typeManga => typeManga !== event.target.value)))
-            }
+    const setManga = manga ? typeManga : genreManga
+
+    const setMangaFunc = (set, event) => {
+        dispatch(set(event.target.checked))
+        const index = setManga.indexOf(event.target.value)
+        if (index === -1) {
+            dispatch(set([...setManga, event.target.value]))
         } else {
-            dispatch(setGenreManga(event.target.checked))
-            const index = genreManga.indexOf(event.target.value)
-            if (index === -1) {
-                dispatch(setGenreManga([...genreManga, event.target.value]))
-            } else {
-                dispatch(setGenreManga(genreManga.filter(genreManga => genreManga !== event.target.value)))
-            }
+            dispatch(set(setManga.filter(setManga => setManga !== event.target.value)))
         }
     }
+
+    const handleSkillChange = (event) => (manga) ? setMangaFunc(setTypeManga, event) : setMangaFunc(setGenreManga, event)
 
     return (
         <Box>
             <Box>
                 <FormControl>
-                    {/*<FormLabel theme={theme} sx={{mb: "10px"}}>Тип</FormLabel>*/}
+                    {
+                        manga ? <FormLabel theme={theme} sx={{mb: "10px"}}>Тип</FormLabel> :
+                            <FormLabel theme={theme} sx={{mb: "10px"}}>Жанр</FormLabel>
+                    }
                     <FormGroup sx={{gap: "10px"}}>
                         {muiCheckbox.map((checkBox) =>
                             <FormControlLabel
@@ -62,7 +59,7 @@ function MuiCheckbox({muiCheckbox, manga}) {
                                     sx={checkboxStyle}
                                     value={checkBox}
                                     key={checkBox}
-                                    checked={(manga ? typeManga : genreManga).includes(checkBox)}
+                                    checked={setManga.includes(checkBox)}
                                     onChange={handleSkillChange}/>}
                             />
                         )}
@@ -74,30 +71,3 @@ function MuiCheckbox({muiCheckbox, manga}) {
 }
 
 export default MuiCheckbox
-
-// defaultChecked
-// sx={{
-//     '& .MuiSvgIcon-root': {fontSize: 49},
-//     size: 455,
-//         color: "#2FE09B",
-//         '&.Mui-checked': {
-//         color: "#2FE09B"
-//     },
-
-// function MuiCheckbox(props) {
-//     const [check, setChecked] = useState(false)
-//     const handleChange = (event) => {
-//         setChecked(event.target.checked)
-//     }
-//     console.log(check)
-//     return (
-//         <Box>
-//             <Box>
-//                 <FormControlLabel
-//                     label='Я красавчег'
-//                     control={<Checkbox checked={check} onChange={handleChange}/>}
-//                 />
-//             </Box>
-//         </Box>
-//     )
-// }

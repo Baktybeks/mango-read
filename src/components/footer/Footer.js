@@ -37,7 +37,7 @@ function Footer() {
                 <div className={classes.bottom__reserved}>©2022, All right reserved.</div>
                 <ul className={`${classes.bottom__list}`}>
                     <li className={classes.bottom__list_item}>
-                        <Link to="auth">Privacy Policy</Link>
+                        <Link to="#">Privacy Policy</Link>
                     </li>
                     <li className={classes.bottom__list_item}>
                         <Link to="#">Terms of Service</Link>

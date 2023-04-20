@@ -2,7 +2,7 @@ import React from 'react'
 import Card from "../../components/card/Card"
 import classes from "./mainPage.module.css"
 import MuiCheckbox from "../../components/muiCheckbox/MuiCheckbox"
-import {setGenreManga, setManga, setTypeManga} from "../../store/slices/mangaSlice"
+import {setGenreManga, setManga, setTypeManga, setYearsManga} from "../../store/slices/mangaSlice"
 import {useDispatch, useSelector} from "react-redux"
 
 const typeManga = ["Манга", "Манхва", "Комиксы", "Маньхуа"]
@@ -16,12 +16,18 @@ function MainPage() {
 
     const handleClearType = () => dispatch(setTypeManga([]))
     const handleClearGenre = () => dispatch(setGenreManga([]))
+    const followBtn = () => {dispatch(setManga(!manga))}
+    const handleYearsChange = (event) =>
+        dispatch(setYearsManga({...inputYears, [event.target.name]: Number(event.target.value)}))
 
-    const {manga} = useSelector(state => state.mangaReducer)
-    // console.log(manga)
+    const {manga, inputYears} = useSelector(state => state.mangaReducer)
 
-    const followBtn = () => {
-        dispatch(setManga(!manga))
+    const numberInput = 2021
+
+    if (inputYears.inp_year_first <= numberInput && numberInput <= inputYears.inp_year_second) {
+        console.log(numberInput, 'в интервале')
+    } else {
+        console.log(numberInput,'не в интервале')
     }
 
     return (
@@ -43,16 +49,25 @@ function MainPage() {
                         </div>
                 }
 
-
                 <div className={`${classes.main__aside_types} ${!manga ? classes.type_true : ''}`}>
 
                     <MuiCheckbox muiCheckbox={manga ? typeManga : genreManga} manga={manga}/>
 
                 </div>
                 <div className={`${classes.main__aside_years} ${!manga ? classes.type_true : ""}`}>
-                    <input className={classes.input} type="number" name="inp_year_first" placeholder="От 0"/>
+                    <input className={classes.input}
+                           type="number"
+                           name="inp_year_first"
+                           placeholder="От 0"
+                           onChange={handleYearsChange}
+                    />
                     <div className={classes.hyphen}></div>
-                    <input className={classes.input} type="number" name="inp_year_second" placeholder="До 2022"/>
+                    <input className={classes.input}
+                           type="number"
+                           name="inp_year_second"
+                           placeholder="До 2022"
+                           onChange={handleYearsChange}
+                    />
                 </div>
                 <div className={classes.main__aside_btn}>
                     <button className={classes.btn} onClick={manga ? handleClearType : handleClearGenre}>Сбросить
@@ -74,8 +89,6 @@ function MainPage() {
                 <Card/>
                 <Card/>
             </div>
-
-
         </main>
     )
 }
