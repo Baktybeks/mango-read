@@ -1,16 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-const ACCESS_KEY = 'm-access'
-const USER_KEY = 'm-username'
-
 const usersSlice = createSlice({
     name: 'usersSlice',
     initialState: {
         loginOrReg: false,
         modalActive: false,
-        isAuth: Boolean(localStorage.getItem(ACCESS_KEY)),
-        user: JSON.parse(localStorage.getItem(USER_KEY)) ?? '',
-        access: localStorage.getItem(ACCESS_KEY) ?? ''
+        isAuth: Boolean(localStorage.getItem('CHECKED')),
+        user: JSON.parse(localStorage.getItem('USER')) ?? '',
+        access: sessionStorage.getItem('ACCESS_TOKEN') ?? ''
     },
     reducers: {
         setLoginOrReg: (state, action) => {
@@ -27,7 +24,7 @@ const usersSlice = createSlice({
         },
         getUser: (state, action) => {
             state.user = action.payload
-            localStorage.setItem(USER_KEY, JSON.stringify(action.payload))
+            localStorage.setItem('USER', JSON.stringify(action.payload))
         },
         setLogin: (state, action) => {
             state.access = action.payload.access
@@ -38,8 +35,8 @@ const usersSlice = createSlice({
             state.user = ''
             state.access = ''
             state.isAuth = false
-            localStorage.removeItem(ACCESS_KEY)
-            localStorage.removeItem(USER_KEY)
+            localStorage.clear()
+            sessionStorage.clear()
         },
     }
 })

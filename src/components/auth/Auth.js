@@ -1,28 +1,49 @@
 import React, {useState} from 'react'
 import classes from "./auth.module.css"
-import profileImg from "../../assets/images/profilephoto.jpg"
+import profileImg from "../../assets/images/profilephoto.png"
 import exit from "../../assets/images/exit.svg"
 import {useDispatch} from "react-redux"
 import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice"
-import {signInApi} from "../../axios/usersApi"
+import {regApi, signInApi} from "../../axios/usersApi"
 
 function Auth({login}) {
     const dispatch = useDispatch()
 
-    const [myCheck, setMyCheck] = useState(false)
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [loginMyCheck, setLoginMyCheck] = useState(false)
+    const [loginUsername, setLoginUsername] = useState('')
+    const [loginPassword, setLoginPassword] = useState('')
+
+    const [regUsername, setRegUsername] = useState('')
+    const [regPassword, setRegPassword] = useState('')
+    const [regImage, setRegImage] = useState('')
+    const [regNickname, setRegNickname] = useState('')
 
     const handleChange = (event) => {
-        setMyCheck(event.target.checked)
+        setLoginMyCheck(event.target.checked)
     }
 
-    const isFormValid = () => username && password
 
-    const submitHandler = (e) => {
+    const isLoginFormValid = () => loginUsername && loginPassword
+    const isRegFormValid = () => regUsername && regNickname && regPassword
+
+    const submitLoginHandler = (e) => {
         e.preventDefault()
-        if (isFormValid()) {
-            dispatch(signInApi(username, password, myCheck))
+        if (isLoginFormValid()) {
+            dispatch(signInApi(loginUsername, loginPassword, loginMyCheck))
+        } else {
+            alert('Введите все данные')
+        }
+    }
+    const submitRegHandler = async (e) => {
+        e.preventDefault()
+
+        if (isRegFormValid()) {
+            const formData = new FormData()
+            formData.append('username', regUsername)
+            formData.append('nickname', regNickname)
+            formData.append('image_file', regImage)
+            formData.append('password', regPassword)
+            dispatch(regApi(formData))
         } else {
             alert('Введите все данные')
         }
@@ -59,7 +80,7 @@ function Auth({login}) {
                 login
                     ?
                     <form className={`${classes.auth__form} ${classes.login}`}
-                          onSubmit={submitHandler}>
+                          onSubmit={submitLoginHandler}>
                         <div
                             className={login ? `${classes.auth__form_text_box} ${classes.login}` : `${classes.auth__form_text_box} ${classes.reg}`}>
                             <input
@@ -67,16 +88,16 @@ function Auth({login}) {
                                 type="text"
                                 name="username"
                                 placeholder="Username"
-                                value={username}
-                                onChange={e => setUsername(e.target.value)}
+                                value={loginUsername}
+                                onChange={e => setLoginUsername(e.target.value)}
                             />
                             <input
                                 className={classes.text}
                                 type="password"
                                 name="password"
                                 placeholder="Password"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
+                                value={loginPassword}
+                                onChange={e => setLoginPassword(e.target.value)}
                             />
                             <div className={classes.checkbox}>
                                 <label htmlFor="checkbox" className={classes.checkbox__label}>
@@ -86,7 +107,7 @@ function Auth({login}) {
                                         id="checkbox"
                                         onChange={handleChange}/>
                                     <div
-                                        className={myCheck ? `${classes.checkbox__box} ${classes.checked}` : `${classes.checkbox__box}`}>
+                                        className={loginMyCheck ? `${classes.checkbox__box} ${classes.checked}` : `${classes.checkbox__box}`}>
                                         <span className={classes.checkbox__box_tick}></span>
                                     </div>
                                     <div className={classes.checkbox__label_title}>Запомнить меня</div>
@@ -96,15 +117,19 @@ function Auth({login}) {
                         </div>
                     </form>
                     :
-                    <form className={`${classes.auth__form} ${classes.reg}`}>
+                    <form className={`${classes.auth__form} ${classes.reg}`}
+                          onSubmit={submitRegHandler}>
                         <div className={classes.auth__form_img}>
                             <img src={profileImg} alt="profileImg"/>
                             <input
                                 className={login ? `${classes.text} ${classes.login}` : `${classes.text} ${classes.reg}`}
                                 type="file"
-                                name="photo"
-                                id="add_img"/>
-                            <label htmlFor="add_img">дОБАВИТЬ ФОТО</label>
+                                name="image_file"
+                                id="add_img"
+                                accept="/image/*, .png, .jpg, .gif, .web"
+                                onChange={e => setRegImage(e.target.files[0])}
+                            />
+                            <label htmlFor="add_img">{regImage == 0 ? "дОБАВИТЬ ФОТО" : "фото добавлено"}</label>
                         </div>
                         <div
                             className={login ? `${classes.auth__form_text_box} ${classes.login}` : `${classes.auth__form_text_box} ${classes.reg}`}>
@@ -114,20 +139,26 @@ function Auth({login}) {
                                 type="text"
                                 name="username"
                                 placeholder="Username"
+                                value={regUsername}
+                                onChange={e => setRegUsername(e.target.value)}
                             />
                             <input
                                 className={classes.text}
                                 type="text"
                                 name="nickname"
                                 placeholder="Nickname"
+                                value={regNickname}
+                                onChange={e => setRegNickname(e.target.value)}
                             />
                             <input
                                 className={classes.text}
                                 type="password"
                                 name="password"
                                 placeholder="Password"
+                                value={regPassword}
+                                onChange={e => setRegPassword(e.target.value)}
                             />
-                            <button type="button">регистрация</button>
+                            <button type="submit">регистрация</button>
                         </div>
                     </form>
             }

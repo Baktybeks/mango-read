@@ -1,20 +1,26 @@
 import axios from 'axios'
 
-const $host = axios.create({
+const $api = axios.create({
     baseURL: process.env.REACT_APP_API_URL
 })
 
-const $authHost = axios.create({
+const $authApi = axios.create({
+    // withCredentials: true,
     baseURL: process.env.REACT_APP_API_URL
 })
+
+$authApi.interceptors.response.use(
+    async (response) => {
+        return await response.data
+    }
+)
 
 const authInterceptor = config => {
-    config.headers.authorization = `Bearer ${localStorage.getItem('m-access')}`
+    const accessToken = sessionStorage.getItem('ACCESS_TOKEN')
+    config.headers.authorization = `Bearer ${accessToken}`
     return config
 }
 
-$authHost.interceptors.request.use(authInterceptor)
-export {
-    $host,
-    $authHost
-}
+$authApi.interceptors.request.use(authInterceptor)
+
+export {$api, $authApi}

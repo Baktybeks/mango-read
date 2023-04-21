@@ -7,7 +7,8 @@ import Auth from "../auth/Auth"
 import {links} from "../../links/links"
 import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
-import {setLoginOrReg, setLogout, setModalActive} from "../../store/slices/usersSlice"
+import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice"
+import {logoutApi} from "../../axios/usersApi"
 
 function Header() {
 
@@ -26,7 +27,10 @@ function Header() {
         dispatch(setLoginOrReg(false))
     }
 
-    const logOut = () => dispatch(setLogout())
+    const logOut = () => {
+        dispatch(logoutApi())
+        // dispatch(setLogout())
+    }
 
     return (
         <header className={classes.header}>

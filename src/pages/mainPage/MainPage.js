@@ -22,13 +22,13 @@ function MainPage() {
 
     const {manga, inputYears} = useSelector(state => state.mangaReducer)
 
-    const numberInput = 2021
+    // const numberInput = 2021
 
-    if (inputYears.inp_year_first <= numberInput && numberInput <= inputYears.inp_year_second) {
-        console.log(numberInput, 'в интервале')
-    } else {
-        console.log(numberInput,'не в интервале')
-    }
+    // if (inputYears.inp_year_first <= numberInput && numberInput <= inputYears.inp_year_second) {
+    //     console.log(numberInput, 'в интервале')
+    // } else {
+    //     console.log(numberInput,'не в интервале')
+    // }
 
     return (
         <main className={`container ${classes.main}`}>
