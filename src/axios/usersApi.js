@@ -52,9 +52,11 @@ export const logoutApi = () => {
     return async (dispatch) => {
         try {
             const refresh = {refresh: localStorage.getItem('REFRESH_TOKEN')}
-            await $authApi.post('auth/logout/', refresh)
-            alert('Вы успешно вышли из системы')
-            dispatch(setLogout())
+            const response = await $authApi.post('auth/logout/', refresh)
+            if (response.status === 204) {
+                alert('Вы успешно вышли из системы')
+                dispatch(setLogout())
+            }
         } catch (e) {
             console.log(e)
         }

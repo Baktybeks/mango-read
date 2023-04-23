@@ -17,6 +17,7 @@ function Auth({login}) {
     const [regPassword, setRegPassword] = useState('')
     const [regImage, setRegImage] = useState('')
     const [regNickname, setRegNickname] = useState('')
+    console.log(regNickname)
 
     const handleChange = (event) => {
         setLoginMyCheck(event.target.checked)

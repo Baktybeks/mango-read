@@ -9,11 +9,25 @@ const $authApi = axios.create({
     baseURL: process.env.REACT_APP_API_URL
 })
 
-$authApi.interceptors.response.use(
-    async (response) => {
-        return await response.data
+$authApi.interceptors.response.use((config) => {
+        return config
+    },
+    async error => {
+        const originalRequest = error.config
+        if (error.response._status == 401 && error.config && !originalRequest._isRetry) {
+            originalRequest._isRetry = true
+            try {
+                const {data} = await $api.get('/refresh',)
+                sessionStorage.setItem('ACCESS_TOKEN', data.access)
+                return $authApi.request(originalRequest)
+            } catch (e) {
+                console.log("Не авторизован")
+            }
+        }
+        throw error
     }
 )
+
 
 const authInterceptor = config => {
     const accessToken = sessionStorage.getItem('ACCESS_TOKEN')

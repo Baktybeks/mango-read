@@ -9,7 +9,7 @@ import {
     createTheme, FormLabel
 } from "@mui/material"
 import {useDispatch, useSelector} from "react-redux"
-import {setGenreManga, setTypeManga} from "../../store/slices/mangaSlice"
+import {setGenreCheckbox, setTypeCheckbox} from "../../store/slices/mangaSlice"
 
 const theme = createTheme({typography: {fontFamily: 'Montserrat', fontSize: '24px'}})
 
@@ -24,12 +24,13 @@ function MuiCheckbox({muiCheckbox, manga}) {
 
     const dispatch = useDispatch()
 
-    const {typeManga, genreManga} = useSelector(state => state.mangaReducer)
+    const {typeCheckbox, genreCheckbox} = useSelector(state => state.mangaReducer)
+    //
+    // console.log("type", typeValue)
+    // console.log("genreCheckbox", genreCheckbox)
+    // console.log("typeCheckbox", typeCheckbox)
 
-    // console.log("type", typeManga)
-    // console.log("genre", genreManga)
-
-    const setManga = manga ? typeManga : genreManga
+    const setManga = manga ? typeCheckbox : genreCheckbox
 
     const setMangaFunc = (set, event) => {
         dispatch(set(event.target.checked))
@@ -41,7 +42,7 @@ function MuiCheckbox({muiCheckbox, manga}) {
         }
     }
 
-    const handleSkillChange = (event) => (manga) ? setMangaFunc(setTypeManga, event) : setMangaFunc(setGenreManga, event)
+    const handleSkillChange = (event) => (manga) ? setMangaFunc(setTypeCheckbox, event) : setMangaFunc(setGenreCheckbox, event)
 
     return (
         <Box>
@@ -54,12 +55,12 @@ function MuiCheckbox({muiCheckbox, manga}) {
                     <FormGroup sx={{gap: "10px"}}>
                         {muiCheckbox.map((checkBox) =>
                             <FormControlLabel
-                                label={<Typography theme={theme}>{checkBox}</Typography>}
+                                label={<Typography theme={theme}>{checkBox.title}</Typography>}
                                 control={<Checkbox
                                     sx={checkboxStyle}
-                                    value={checkBox}
-                                    key={checkBox}
-                                    checked={setManga.includes(checkBox)}
+                                    value={checkBox.title}
+                                    key={checkBox.id}
+                                    checked={setManga.includes(checkBox.title)}
                                     onChange={handleSkillChange}/>}
                             />
                         )}
