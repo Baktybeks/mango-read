@@ -11,7 +11,7 @@ export const publicRoutes = [
         element: <MainPage/>
     },
     {
-        path: links.info,
+        path: links.info + '/:id/',
         element: <InfoPage/>
     },
     {

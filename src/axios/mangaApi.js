@@ -1,6 +1,7 @@
 import {$api, $authApi} from "./index"
 import {setError} from "../store/slices/errorSlice"
-import {setGenreValue} from "../store/slices/mangaSlice"
+import {setCard, setComments, setGenreValue, setMangaList} from "../store/slices/mangaSlice"
+import {preloaderOff, preloaderOn} from "../store/slices/preloaderSlice"
 
 export const getGenreListApi = () => {
     return async (dispatch) => {
@@ -12,6 +13,51 @@ export const getGenreListApi = () => {
         }
     }
 }
+
+
+export const getMangaListApi = (limit=0,offset=0) => {
+    return async (dispatch) => {
+        dispatch(preloaderOn())
+        try {
+            const {data} = await $api.get(`v1/manga/`)
+            dispatch(setMangaList(data))
+        } catch (e) {
+            dispatch(setError(e.message))
+        } finally {
+            dispatch(preloaderOff())
+        }
+    }
+}
+
+export const getCardApi = (id) => {
+    return async (dispatch) => {
+        dispatch(preloaderOn())
+        try {
+            const {data} = await $api.get(`v1/manga/${id}`)
+            dispatch(setCard(data))
+        } catch (e) {
+            dispatch(setError(e.message))
+        } finally {
+            dispatch(preloaderOff())
+        }
+    }
+}
+
+export const getCommentsApi = (id) => {
+    return async (dispatch) => {
+        dispatch(preloaderOn())
+        try {
+            const {data} = await $api.get(`v1/manga/${id}/comments/`)
+            dispatch(setComments(data))
+        } catch (e) {
+            dispatch(setError(e.message))
+        } finally {
+            dispatch(preloaderOff())
+        }
+    }
+}
+
+
 
 export const addCommentApi = (id, text) => {
     return async () => {

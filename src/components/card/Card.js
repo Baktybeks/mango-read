@@ -1,24 +1,25 @@
 import React from 'react'
-// import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import classes from "./card.module.css"
-import card from "../../assets/images/card.png"
 
-function Card() {
-    // const navigate = useNavigate()
+function Card({card}) {
 
-    // const clickHandler = () => navigate(`/products/${product.product_slug}`)
-    // let sliceName = product.name.slice(0,16)
-    // if (sliceName.length < product.name.length) {
-    //     sliceName += '...'
-    // }
+    const navigate = useNavigate()
+
+    const clickHandler = () => navigate(`/info/${card.id}`)
+
+    let sliceName = card.ru_name.slice(0,16)
+    if (sliceName.length < card.ru_name.length) {
+        sliceName += '...'
+    }
 
     return (
-        <div className={classes.card}>
-            <img className={classes.card__img} src={card} alt="card"/>
-            <div className={classes.card__info}>
-                <div className={classes.card__info_year}>Год: 2000</div>
-                <div className={classes.card__info_title}>Название аниме оно может быть ...</div>
-            </div>
+        <div className={classes.card} onClick={clickHandler}>
+                    <img className={classes.card__img} src={card.image} alt="card"/>
+                    <div className={classes.card__info}>
+                        <div className={classes.card__info_year}>Год: {card.issue_year}</div>
+                        <div className={classes.card__info_title}>{card.ru_name}</div>
+                    </div>
         </div>
     )
 }

@@ -10,18 +10,21 @@ const mangaSlice = createSlice({
             inp_year_second: 0
         },
         manga: true,
-        genreValue:[],
+        genreValue: [],
         typeValue:
             [
-            {id: 1, title: 'Манга'},
-            {id: 2, title: 'Манхва'},
-            {id: 3, title: 'Комиксы'},
-            {id: 4, title: 'Маньхуа'}
-        ],
+                {id: 1, title: 'Манга'},
+                {id: 2, title: 'Манхва'},
+                {id: 3, title: 'Комиксы'},
+                {id: 4, title: 'Маньхуа'}
+            ],
         selectedTypeGenre: {
-            selectedType:[],
-            selectedGenre:[]
-        }
+            selectedType: [],
+            selectedGenre: []
+        },
+        mangaList: [],
+        card: {},
+        comments: []
     },
     reducers: {
         setTypeCheckbox: (state, action) => {
@@ -41,10 +44,29 @@ const mangaSlice = createSlice({
         },
         setManga: (state, action) => {
             state.manga = action.payload
+        },
+        setMangaList: (state, action) => {
+            state.mangaList = action.payload
+        },
+        setCard: (state, action) => {
+            state.card = action.payload
+        },
+        setComments: (state, action) => {
+            state.comments = action.payload
         }
     }
 })
 
-export const {setTypeCheckbox, setGenreCheckbox, setGenreValue, setYearsManga, setManga, setSelectedTypeGenre} = mangaSlice.actions
+export const {
+    setTypeCheckbox,
+    setGenreCheckbox,
+    setGenreValue,
+    setYearsManga,
+    setManga,
+    setSelectedTypeGenre,
+    setMangaList,
+    setCard,
+    setComments
+} = mangaSlice.actions
 
 export default mangaSlice.reducer

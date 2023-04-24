@@ -9,7 +9,7 @@ import {
     setYearsManga
 } from "../../store/slices/mangaSlice"
 import {useDispatch, useSelector} from "react-redux"
-import {getGenreListApi} from "../../axios/mangaApi"
+import {getGenreListApi, getMangaListApi} from "../../axios/mangaApi"
 
 function MainPage() {
 
@@ -22,8 +22,13 @@ function MainPage() {
         typeValue,
         typeCheckbox,
         genreCheckbox,
-        selectedTypeGenre
+        selectedTypeGenre,
+        mangaList
     } = useSelector(state => state.mangaReducer)
+
+    const {preloader} = useSelector(state => state.preloaderReducer)
+    const {error} = useSelector(state => state.errorReducer)
+
 
     console.log('selectedTypeGenre&&&&&&&&&&&&&&&&&&', selectedTypeGenre)
 
@@ -37,7 +42,10 @@ function MainPage() {
 
     useEffect(() => {
         dispatch(getGenreListApi())
+        dispatch(getMangaListApi())
     }, [dispatch])
+
+    console.log('mangaList',mangaList)
 
     const sentTypeGenre = () => {
 
@@ -117,20 +125,19 @@ function MainPage() {
                     <button className={classes.btn} onClick={sentTypeGenre}>Применить</button>
                 </div>
             </aside>
-            <div className={classes.main__card}>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-            </div>
+            <section className={classes.main__card}>
+                {
+                    preloader
+                        ?
+                        <h1 className={classes.loading}>Loading......</h1>
+                        :
+                        error
+                            ?
+                            <p>{error}</p>
+                            :
+                            mangaList.map(card => <Card key={card.id} card={card}/>)
+                }
+            </section>
         </main>
     )
 }

@@ -36,14 +36,10 @@
   margin: 0 auto; }
 
 .auth__divider_line {
-  position: absolute;
   background-color: #878787;
   border-radius: 2px;
-  width: 500px;
-  height: 2px;
-  left: 50%;
-  top: -2.5px;
-  transform: translate(-50%); }
+  width: 100%;
+  height: 2px; }
 
 .auth__form {
   width: 500px;

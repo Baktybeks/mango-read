@@ -24,11 +24,11 @@ function MuiCheckbox({muiCheckbox, manga}) {
 
     const dispatch = useDispatch()
 
-    const {typeCheckbox, genreCheckbox} = useSelector(state => state.mangaReducer)
+    const {typeCheckbox, genreCheckbox, typeValue} = useSelector(state => state.mangaReducer)
     //
-    // console.log("type", typeValue)
+    console.log("type", typeValue)
     // console.log("genreCheckbox", genreCheckbox)
-    // console.log("typeCheckbox", typeCheckbox)
+    console.log("typeCheckbox", typeCheckbox)
 
     const setManga = manga ? typeCheckbox : genreCheckbox
 
