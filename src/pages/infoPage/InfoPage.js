@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom"
 import classes from "./infoPage.module.css"
 import {useDispatch, useSelector} from "react-redux"
@@ -6,38 +6,33 @@ import {getCardApi, getCommentsApi} from "../../axios/mangaApi"
 import Modal from "../../components/modal/Modal"
 import AddComment from "../../components/addComment/AddComment"
 import {setCommentModalActive} from "../../store/slices/mangaSlice"
+import AppPaginationComment from "../../components/appPaginationComment/AppPaginationComment"
 
 function InfoPage() {
 
     const dispatch = useDispatch()
     const {id} = useParams()
     const navigate = useNavigate()
-
     const {card, comments, commentModalActive} = useSelector(state => state.mangaReducer)
-    console.log('commentModalActive',commentModalActive)
     const {user} = useSelector(state => state.usersReducer)
     const {error} = useSelector(state => state.errorReducer)
     const {preloader} = useSelector(state => state.preloaderReducer)
-
-
-    const userIsEmpty = () => {
+    const [items, setItems] = useState([])
+    const handleAddComment = () => {
         if (!Object.keys(user).length) {
             alert('Авторизируйтесь')
+        } else {
+            dispatch(setCommentModalActive(true))
         }
     }
-
-
     useEffect(() => {
         dispatch(getCardApi(id))
         dispatch(getCommentsApi(id))
-    }, [dispatch])
-
+    }, [dispatch,id])
 
     return (
         <div className={`container ${classes.card}`}>
-            <button onClick={() => navigate(-1)}
-                    className={classes.card__back}
-            >
+            <button onClick={() => navigate(-1)} className={classes.card__back}>
                 <span className={classes.card__back_arrow_left}></span> Назад
             </button>
             {
@@ -52,7 +47,7 @@ function InfoPage() {
                         <>
                             <div className={classes.card__content}>
                                 <div className={classes.card__content_top}>
-                                    <img src={card.image} alt="image"
+                                    <img src={card.image} alt={card.image}
                                          className={classes.card__content_top_img}/>
                                     <div className={classes.card__content_top_info}>
                                         <div className={classes.card__content_top_title}>{card.ru_name} </div>
@@ -82,7 +77,7 @@ function InfoPage() {
                                     <div className={classes.top}>Топ комментарий</div>
                                     <button
                                         className={classes.btn}
-                                        onClick={() => dispatch(setCommentModalActive(true))}
+                                        onClick={handleAddComment}
                                     >
                                         Добавить комментарий
                                     </button>
@@ -98,7 +93,7 @@ function InfoPage() {
                                                 <p>{error}</p>
                                                 :
                                                 <>
-                                                    {comments.map(comment =>
+                                                    {items.map(comment =>
                                                         <li className={classes.card__comments_comment}>
                                                             <div className={classes.img_box}>
                                                                 <img className={classes.img}
@@ -122,14 +117,18 @@ function InfoPage() {
                                                 </>
                                     }
                                 </ul>
+                                <div className={classes.pagination}>
+                                    <AppPaginationComment items={comments}
+                                                          pageSize={3}
+                                                          setItems={(p) => setItems(p)}/>
+                                </div>
                             </div>
-
                         </>
             }
-            <Modal active={commentModalActive} commentOrUser="comment"
-            >
+            <Modal active={commentModalActive} commentOrUser="comment">
                 <AddComment id={id}/>
             </Modal>
+
         </div>
 
     )

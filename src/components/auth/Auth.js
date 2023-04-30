@@ -24,7 +24,7 @@ function Auth({login}) {
 
 
     const isLoginFormValid = () => loginUsername && loginPassword
-    const isRegFormValid = () => regUsername && regNickname && regPassword
+    const isRegFormValid = () => regUsername && regNickname && regPassword && regImage
 
     const submitLoginHandler = (e) => {
         e.preventDefault()

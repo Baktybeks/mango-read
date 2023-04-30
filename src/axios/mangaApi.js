@@ -1,7 +1,8 @@
 import {$api, $authApi} from "./index"
 import {setError} from "../store/slices/errorSlice"
-import {setCard, setComments, setGenreValue, setMangaList} from "../store/slices/mangaSlice"
+import {setCard, setComments, setGenreValue, setMangaCount, setMangaList} from "../store/slices/mangaSlice"
 import {preloaderOff, preloaderOn} from "../store/slices/preloaderSlice"
+
 
 export const getGenreListApi = () => {
     return async (dispatch) => {
@@ -27,6 +28,7 @@ export const getMangaListApi = (limit = 0, offset = 0) => {
                     }
                 }
                 )
+            dispatch(setMangaCount(data.count))
             dispatch(setMangaList(data.results))
         } catch (e) {
             dispatch(setError(e.message))
@@ -66,11 +68,12 @@ export const getCommentsApi = (id) => {
 
 
 export const addCommentApi = (id, text) => {
-    return async () => {
+    return async (dispatch) => {
         try {
             const response = await $authApi.post(`v1/manga/${id}/add-comment/`, {id, text})
             console.log(response)
             alert('Вы успешно отправили комментарий')
+            dispatch(getCommentsApi(id))
         } catch
             (e) {
             console.log(e)

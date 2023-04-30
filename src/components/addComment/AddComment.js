@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import classes from "./addComment.module.css"
 import {useDispatch, useSelector} from "react-redux"
 import {addCommentApi} from "../../axios/mangaApi"
-import {setModalActive} from "../../store/slices/usersSlice"
+import {setCommentModalActive} from "../../store/slices/mangaSlice"
 
 
 function AddComment({id}) {
@@ -10,11 +10,12 @@ function AddComment({id}) {
     const {user} = useSelector(state => state.usersReducer)
     const [comment, setComment] = useState('')
     const isCommentFormValid = () => comment
+
     const submitComment = (e) => {
         e.preventDefault()
         if (isCommentFormValid()) {
             dispatch(addCommentApi(id,comment))
-            dispatch(setModalActive(false))
+            dispatch(setCommentModalActive(false))
         } else {
             alert('Введите все данные')
         }

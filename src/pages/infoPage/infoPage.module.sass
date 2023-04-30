@@ -105,7 +105,7 @@
                 line-height: 22px
                 text-transform: uppercase
                 color: #AD02E0
-
+                cursor: pointer
         &_comment
             display: flex
             flex-direction: row
@@ -139,60 +139,8 @@
                     font-size: 24px
                     line-height: 35px
                     color: #878787
-
-
-.add_comment_block
-    display: flex
-    flex-direction: column
-    width: 780px
-    height: 302px
-    background: #FFFFFF
-    border-radius: 32px
-    .user_info
-        display: flex
-        gap: 52px
-        margin: 37px 0 53px 60px
-        &_name
-            @extend %fontMontserrat
-            font-size: 35px
-            line-height: 43px
-            color: #000000
-    .img
-        width: 100px
-        height: 100px
-        object-fit: cover
-        border-radius: 50%
-    .add_comment
-        display: flex
-        margin: 0 auto
-        width: 660px
-        height: 52px
-        &_input
+        & .pagination
             display: flex
-            flex-direction: row
-            align-items: center
-            padding: 0 10px
-            gap: 10px
-            width: 500px
-            border: 1px solid #000000
-            border-radius: 8px 0 0 8px
-            @extend %fontMontserrat
-            font-size: 18px
-            line-height: 35px
-            color: #878787
-        &_btn
-            cursor: pointer
-            display: flex
-            flex-direction: row
             justify-content: center
             align-items: center
-            padding: 16px 32px
-            gap: 10px
-            width: 160px
-            background: #AD02E0
-            border-radius: 0 8px 8px 0
-            @extend %fontMontserrat
-            font-size: 16px
-            line-height: 20px
-            text-transform: uppercase
-            color: #FFFFFF
+            margin-bottom: 32px

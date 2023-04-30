@@ -29,7 +29,6 @@ function Header() {
 
     const logOut = () => {
         dispatch(logoutApi())
-        // dispatch(setLogout())
     }
 
     return (

@@ -10,6 +10,7 @@ const mangaSlice = createSlice({
             inp_year_second: 0
         },
         manga: true,
+        mangaCount: 0,
         genreValue: [],
         typeValue:
             [
@@ -49,6 +50,9 @@ const mangaSlice = createSlice({
         setMangaList: (state, action) => {
             state.mangaList = action.payload
         },
+        setMangaCount: (state, action) => {
+            state.mangaCount = action.payload
+        },
         setCard: (state, action) => {
             state.card = action.payload
         },
@@ -71,7 +75,8 @@ export const {
     setMangaList,
     setCard,
     setComments,
-    setCommentModalActive
+    setCommentModalActive,
+    setMangaCount
 } = mangaSlice.actions
 
 export default mangaSlice.reducer
