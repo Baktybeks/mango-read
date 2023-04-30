@@ -94,6 +94,7 @@
   vertical-align: bottom; }
 
 .card__comments {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 33px; }
@@ -134,19 +135,12 @@
   object-fit: cover;
   border-radius: 50%; }
 
-.card__comments_comment .divider_hr {
-  margin-left: 26px;
-  background-color: red;
-  height: 100%; }
-
-.card__comments_comment .divider_hr hr {
-  height: 100%;
-  width: 2px; }
-
 .card__comments_comment .content {
   margin-left: 26px;
   display: flex;
   flex-direction: column;
+  border-left: 2px solid #878787;
+  padding-left: 26px;
   gap: 13px; }
 
 .card__comments_comment .content .user_info_name {

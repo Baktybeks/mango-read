@@ -59,6 +59,22 @@ export const logoutApi = () => {
             }
         } catch (e) {
             console.log(e)
+            if (e.response.status === 401) {
+                alert('Вы вышли из системы')
+                dispatch(setLogout())
+            }
+        }
+    }
+}
+export const checkAuthApi = () => {
+    return async (dispatch) => {
+        try {
+            const refresh = {refresh: localStorage.getItem('REFRESH_TOKEN')}
+            const response = await $api.post('token/refresh/', refresh)
+            sessionStorage.setItem('ACCESS_TOKEN', response.data.access)
+            dispatch(setLogin({access: response.data.access}))
+        } catch (e) {
+            console.log(e)
         }
     }
 }

@@ -10,6 +10,8 @@ import {
 } from "../../store/slices/mangaSlice"
 import {useDispatch, useSelector} from "react-redux"
 import {getGenreListApi, getMangaListApi} from "../../axios/mangaApi"
+import {checkAuthApi} from "../../axios/usersApi"
+import {setLogout} from "../../store/slices/usersSlice"
 
 function MainPage() {
 
@@ -29,9 +31,6 @@ function MainPage() {
     const {preloader} = useSelector(state => state.preloaderReducer)
     const {error} = useSelector(state => state.errorReducer)
 
-
-    console.log('selectedTypeGenre&&&&&&&&&&&&&&&&&&', selectedTypeGenre)
-
     const handleClearType = () => dispatch(setTypeCheckbox([]))
     const handleClearGenre = () => dispatch(setGenreCheckbox([]))
 
@@ -42,7 +41,13 @@ function MainPage() {
 
     useEffect(() => {
         dispatch(getGenreListApi())
-        dispatch(getMangaListApi())
+        dispatch(getMangaListApi(12))
+        if (localStorage.getItem('CHECKED')){
+            dispatch(checkAuthApi())
+        } else {
+            dispatch(setLogout())
+        }
+
     }, [dispatch])
 
     console.log('mangaList',mangaList)
@@ -135,6 +140,7 @@ function MainPage() {
                             ?
                             <p>{error}</p>
                             :
+                            // ''
                             mangaList.map(card => <Card key={card.id} card={card}/>)
                 }
             </section>

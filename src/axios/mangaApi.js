@@ -15,12 +15,19 @@ export const getGenreListApi = () => {
 }
 
 
-export const getMangaListApi = (limit=0,offset=0) => {
+export const getMangaListApi = (limit = 0, offset = 0) => {
     return async (dispatch) => {
         dispatch(preloaderOn())
         try {
-            const {data} = await $api.get(`v1/manga/`)
-            dispatch(setMangaList(data))
+            const {data} = await $api.get(`v1/manga/`,
+                {
+                    params: {
+                        limit,
+                        offset,
+                    }
+                }
+                )
+            dispatch(setMangaList(data.results))
         } catch (e) {
             dispatch(setError(e.message))
         } finally {
@@ -56,7 +63,6 @@ export const getCommentsApi = (id) => {
         }
     }
 }
-
 
 
 export const addCommentApi = (id, text) => {

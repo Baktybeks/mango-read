@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useNavigate, useParams} from "react-router-dom"
-import classes from "./info.module.css"
+import classes from "./infoPage.module.css"
 import {useDispatch, useSelector} from "react-redux"
 import {getCardApi, getCommentsApi} from "../../axios/mangaApi"
 import Modal from "../../components/modal/Modal"
+import AddComment from "../../components/addComment/AddComment"
+import {setCommentModalActive} from "../../store/slices/mangaSlice"
 
 function InfoPage() {
 
@@ -11,17 +13,25 @@ function InfoPage() {
     const {id} = useParams()
     const navigate = useNavigate()
 
-    const [modalActive, setModalActive] = useState(false)
-
-    const {card, comments} = useSelector(state => state.mangaReducer)
+    const {card, comments, commentModalActive} = useSelector(state => state.mangaReducer)
+    console.log('commentModalActive',commentModalActive)
     const {user} = useSelector(state => state.usersReducer)
     const {error} = useSelector(state => state.errorReducer)
     const {preloader} = useSelector(state => state.preloaderReducer)
+
+
+    const userIsEmpty = () => {
+        if (!Object.keys(user).length) {
+            alert('Авторизируйтесь')
+        }
+    }
+
 
     useEffect(() => {
         dispatch(getCardApi(id))
         dispatch(getCommentsApi(id))
     }, [dispatch])
+
 
     return (
         <div className={`container ${classes.card}`}>
@@ -61,7 +71,8 @@ function InfoPage() {
                             <div className={classes.card__description}>
                                 <div className={classes.card__description_title}>Синопсис</div>
                                 <div className={classes.card__description_info}
-                                     dangerouslySetInnerHTML={{__html: card.description}}/>
+                                     dangerouslySetInnerHTML={{__html: card.description}}
+                                />
                             </div>
                             <div className={classes.card__divider}>
                                 <div className={classes.card__divider_line}></div>
@@ -71,69 +82,53 @@ function InfoPage() {
                                     <div className={classes.top}>Топ комментарий</div>
                                     <button
                                         className={classes.btn}
-                                        onClick={() => setModalActive(true)}
+                                        onClick={() => dispatch(setCommentModalActive(true))}
                                     >
                                         Добавить комментарий
                                     </button>
                                 </div>
                                 <ul>
-                                        {
-                                            preloader
+                                    {
+                                        preloader
+                                            ?
+                                            <h1 className={classes.loading}>Loading......</h1>
+                                            :
+                                            error
                                                 ?
-                                                <h1 className={classes.loading}>Loading......</h1>
+                                                <p>{error}</p>
                                                 :
-                                                error
-                                                    ?
-                                                    <p>{error}</p>
-                                                    :
-                                                    <>
-                                                        {comments.map(comment =>
-                                                            <li className={classes.card__comments_comment}>
-                                                                <div className={classes.img_box}>
-                                                                    <img className={classes.img}
-                                                                         src={comment.user.image_file}
-                                                                         alt={comment.user.nickname}/>
+                                                <>
+                                                    {comments.map(comment =>
+                                                        <li className={classes.card__comments_comment}>
+                                                            <div className={classes.img_box}>
+                                                                <img className={classes.img}
+                                                                     src={comment.user.image_file}
+                                                                     alt={comment.user.nickname}/>
+                                                            </div>
+                                                            <div className={classes.divider}>
+                                                                <div className={classes.divider_line}></div>
+                                                            </div>
+                                                            <div className={classes.content}>
+                                                                <div className={classes.user_info_name}>
+                                                                    {comment.user.username}, {comment.user.nickname}
                                                                 </div>
-                                                                <div className={classes.divider}>
-                                                                    <div className={classes.divider_line}></div>
+                                                                <div className={classes.text}>
+                                                                    {comment.text}
                                                                 </div>
-                                                                <div className={classes.divider_hr}>
-                                                                    <hr/>
-                                                                </div>
-                                                                <div className={classes.content}>
-                                                                    <div className={classes.user_info_name}>
-                                                                        {comment.user.username}, {comment.user.nickname}
-                                                                    </div>
-                                                                    <div className={classes.text}>
-                                                                        {comment.text}
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        )
-                                                        }
-                                                    </>
-                                        }
+                                                            </div>
+                                                        </li>
+                                                    )
+                                                    }
+                                                </>
+                                    }
                                 </ul>
                             </div>
 
                         </>
             }
-            <Modal active={modalActive} setActive={setModalActive}>
-                <div className={classes.add_comment_block}>
-                    <div className={classes.user_info}>
-                        <img className={classes.img} src={user.image_file} alt={user.nickname}/>
-                        <div className={classes.user_info_name}>
-                            {user.username}, {user.nickname}
-                        </div>
-                    </div>
-                    <div className={classes.add_comment}>
-                        <input className={classes.add_comment_input}
-                               type="text"
-                               placeholder="Добавьте комментарий"
-                        />
-                        <button className={classes.add_comment_btn}>добавить</button>
-                    </div>
-                </div>
+            <Modal active={commentModalActive} commentOrUser="comment"
+            >
+                <AddComment id={id}/>
             </Modal>
         </div>
 

@@ -24,7 +24,8 @@ const mangaSlice = createSlice({
         },
         mangaList: [],
         card: {},
-        comments: []
+        comments: [],
+        commentModalActive: false
     },
     reducers: {
         setTypeCheckbox: (state, action) => {
@@ -53,6 +54,9 @@ const mangaSlice = createSlice({
         },
         setComments: (state, action) => {
             state.comments = action.payload
+        },
+        setCommentModalActive: (state, action) => {
+            state.commentModalActive = action.payload
         }
     }
 })
@@ -66,7 +70,8 @@ export const {
     setSelectedTypeGenre,
     setMangaList,
     setCard,
-    setComments
+    setComments,
+    setCommentModalActive
 } = mangaSlice.actions
 
 export default mangaSlice.reducer

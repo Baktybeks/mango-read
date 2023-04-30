@@ -17,7 +17,6 @@ function Auth({login}) {
     const [regPassword, setRegPassword] = useState('')
     const [regImage, setRegImage] = useState('')
     const [regNickname, setRegNickname] = useState('')
-    console.log(regNickname)
 
     const handleChange = (event) => {
         setLoginMyCheck(event.target.checked)
@@ -130,7 +129,7 @@ function Auth({login}) {
                                 accept="/image/*, .png, .jpg, .gif, .web"
                                 onChange={e => setRegImage(e.target.files[0])}
                             />
-                            <label htmlFor="add_img">{regImage == 0 ? "дОБАВИТЬ ФОТО" : "фото добавлено"}</label>
+                            <label htmlFor="add_img">{!regImage ? "дОБАВИТЬ ФОТО" : "фото добавлено"}</label>
                         </div>
                         <div
                             className={login ? `${classes.auth__form_text_box} ${classes.login}` : `${classes.auth__form_text_box} ${classes.reg}`}>

@@ -75,7 +75,7 @@ function Header() {
                     }
                 </div>
             </div>
-            <Modal active={modalActive} setActive={setModalActive}>
+            <Modal active={modalActive} commentOrUser="user">
                 <Auth login={loginOrReg}/>
             </Modal>
         </header>

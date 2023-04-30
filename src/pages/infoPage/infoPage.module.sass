@@ -85,6 +85,7 @@
             background-repeat: no-repeat
             vertical-align: bottom
     &__comments
+        width: 100%
         display: flex
         flex-direction: column
         gap: 33px
@@ -120,21 +121,13 @@
                     height: 100px
                     object-fit: cover
                     border-radius: 50%
-            & .divider_hr
-                margin-left: 26px
-                background-color: red
-                height: 100%
-                & hr
-                    height: 100%
-                    width: 2px
-
-
             & .content
                 margin-left: 26px
                 //width: 1063px
                 display: flex
                 flex-direction: column
-
+                border-left: 2px solid #878787
+                padding-left: 26px
                 gap: 13px
                 & .user_info_name
                     @extend %fontMontserrat

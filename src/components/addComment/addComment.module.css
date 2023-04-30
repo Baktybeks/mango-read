@@ -1,5 +1,63 @@
-.comment {
+.add_comment_block .user_info_name, .add_comment_block .add_comment_input, .add_comment_block .add_comment_btn {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400; }
+
+.add_comment_block {
+  display: flex;
+  flex-direction: column;
   width: 780px;
   height: 302px;
   background: #FFFFFF;
   border-radius: 32px; }
+
+.add_comment_block .user_info {
+  display: flex;
+  gap: 52px;
+  margin: 37px 0 53px 60px; }
+
+.add_comment_block .user_info_name {
+  font-size: 35px;
+  line-height: 43px;
+  color: #000000; }
+
+.add_comment_block .img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%; }
+
+.add_comment_block .add_comment {
+  display: flex;
+  margin: 0 auto;
+  width: 660px;
+  height: 52px; }
+
+.add_comment_block .add_comment_input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px;
+  gap: 10px;
+  width: 500px;
+  border: 1px solid #000000;
+  border-radius: 8px 0 0 8px;
+  font-size: 18px;
+  line-height: 35px;
+  color: #878787; }
+
+.add_comment_block .add_comment_btn {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  gap: 10px;
+  width: 160px;
+  background: #AD02E0;
+  border-radius: 0 8px 8px 0;
+  font-size: 16px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: #FFFFFF; }
