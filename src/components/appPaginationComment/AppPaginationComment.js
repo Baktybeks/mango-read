@@ -1,48 +1,41 @@
 import React, {useEffect, useState} from 'react'
 import {Pagination, PaginationItem} from "@mui/material"
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import {useDispatch, useSelector} from "react-redux"
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
+import {setCurrentComments} from "../../store/slices/mangaSlice"
 
-function AppPaginationComment({items, pageSize, setItems}) {
+function AppPaginationComment() {
 
-    const [pagination, setPagination] = useState({
-        count: 0,
-        from: 0,
-        to: pageSize
-    })
+    const dispatch = useDispatch()
 
-    const service = {
-        getData: ({from, to}) => {
-            return new Promise((resolve) => {
-                const data = items.slice(from, to)
-                resolve({
-                    count: items.length,
-                    data: data
-                })
-            })
-        }
+    const itemsPerPage = 3
+
+    const {comments} = useSelector(state => state.mangaReducer)
+
+    const totalPages = Math.ceil(comments.length / itemsPerPage)
+
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    const currentPageData = comments.slice(startIndex, endIndex)
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value)
     }
 
     useEffect(() => {
-        service.getData({from: pagination.from, to: pagination.to}).then(response => {
-            setPagination({...pagination, count: response.count})
-            setItems(response.data)
-            console.log(response)
-        })
-    }, [pagination.from, pagination.to])
+        dispatch(setCurrentComments(currentPageData))
+    }, [dispatch, currentPage])
 
-    const handlePageChange = (e, page) => {
-        const from = (page - 1) * pageSize
-        const to = (page - 1) * pageSize + pageSize
-        setPagination({...pagination, from: from, to: to})
-    }
-    const countPerPage = Math.ceil(pagination.count / pageSize)
     return (
-        <div>
+        <>
             {
-                !countPerPage ? <div style={{fontFamily: 'Montserrat', fontSize: '24px'}}>Комментарий: Ещё нету</div> :
+                !totalPages ? <div style={{fontFamily: 'Montserrat', fontSize: '24px'}}>Комментарий: Ещё нету</div> :
                     <Pagination
-                        count={countPerPage}
+                        count={totalPages}
+                        page={currentPage}
                         onChange={handlePageChange}
                         color="success"
                         renderItem={(item) => (
@@ -55,9 +48,7 @@ function AppPaginationComment({items, pageSize, setItems}) {
                         )}
                     />
             }
-
-        </div>
-
+        </>
     )
 }
 

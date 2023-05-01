@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux"
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 
-function MyPagination({ limit }) {
+function AppPaginationManga({ limit }) {
 
     const dispatch = useDispatch()
     const [page, setPage] = useState(1);
@@ -14,7 +14,7 @@ function MyPagination({ limit }) {
     useEffect(() => {
         const offset = (page - 1) * limit;
         dispatch(getMangaListApi(limit, offset))
-    }, [limit, page]);
+    }, [dispatch, limit, page]);
 
     const handlePageChange = (event, value) => {
         setPage(value);
@@ -40,4 +40,4 @@ function MyPagination({ limit }) {
     );
 }
 
-export default MyPagination
+export default AppPaginationManga

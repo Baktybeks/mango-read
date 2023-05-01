@@ -26,6 +26,7 @@ const mangaSlice = createSlice({
         mangaList: [],
         card: {},
         comments: [],
+        currentComments: [],
         commentModalActive: false
     },
     reducers: {
@@ -59,6 +60,9 @@ const mangaSlice = createSlice({
         setComments: (state, action) => {
             state.comments = action.payload
         },
+        setCurrentComments: (state, action) => {
+            state.currentComments = action.payload
+        },
         setCommentModalActive: (state, action) => {
             state.commentModalActive = action.payload
         }
@@ -76,7 +80,8 @@ export const {
     setCard,
     setComments,
     setCommentModalActive,
-    setMangaCount
+    setMangaCount,
+    setCurrentComments
 } = mangaSlice.actions
 
 export default mangaSlice.reducer

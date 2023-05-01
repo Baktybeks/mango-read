@@ -50,8 +50,6 @@ function MainPage() {
         }
     }, [dispatch])
 
-    console.log('mangaList', mangaList)
-
     const sentTypeGenre = () => {
 
         let sentTypeCheckbox = []

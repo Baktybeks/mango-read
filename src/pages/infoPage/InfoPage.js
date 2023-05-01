@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useNavigate, useParams} from "react-router-dom"
 import classes from "./infoPage.module.css"
 import {useDispatch, useSelector} from "react-redux"
@@ -13,11 +13,11 @@ function InfoPage() {
     const dispatch = useDispatch()
     const {id} = useParams()
     const navigate = useNavigate()
-    const {card, comments, commentModalActive} = useSelector(state => state.mangaReducer)
+    const {card, commentModalActive, currentComments} = useSelector(state => state.mangaReducer)
+    console.log('currentComments', currentComments)
     const {user} = useSelector(state => state.usersReducer)
     const {error} = useSelector(state => state.errorReducer)
     const {preloader} = useSelector(state => state.preloaderReducer)
-    const [items, setItems] = useState([])
     const handleAddComment = () => {
         if (!Object.keys(user).length) {
             alert('Авторизируйтесь')
@@ -28,11 +28,11 @@ function InfoPage() {
     useEffect(() => {
         dispatch(getCardApi(id))
         dispatch(getCommentsApi(id))
-    }, [dispatch,id])
+    }, [dispatch, id])
 
     return (
         <div className={`container ${classes.card}`}>
-            <button onClick={() => navigate(-1)} className={classes.card__back}>
+            <button onClick={() => navigate('/')} className={classes.card__back}>
                 <span className={classes.card__back_arrow_left}></span> Назад
             </button>
             {
@@ -93,7 +93,7 @@ function InfoPage() {
                                                 <p>{error}</p>
                                                 :
                                                 <>
-                                                    {items.map(comment =>
+                                                    {currentComments.map(comment =>
                                                         <li className={classes.card__comments_comment}>
                                                             <div className={classes.img_box}>
                                                                 <img className={classes.img}
@@ -118,9 +118,7 @@ function InfoPage() {
                                     }
                                 </ul>
                                 <div className={classes.pagination}>
-                                    <AppPaginationComment items={comments}
-                                                          pageSize={3}
-                                                          setItems={(p) => setItems(p)}/>
+                                    <AppPaginationComment/>
                                 </div>
                             </div>
                         </>
