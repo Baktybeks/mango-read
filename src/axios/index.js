@@ -14,10 +14,11 @@ $authApi.interceptors.response.use((config) => {
     },
     async error => {
         const originalRequest = error.config
-        if (error.response._status == 401 && error.config && !originalRequest._isRetry) {
+        if (Number(error.response._status) === 401 && error.config && !originalRequest._isRetry) {
             originalRequest._isRetry = true
             try {
-                const {data} = await $api.get('/refresh',)
+                const refresh = {refresh: localStorage.getItem('REFRESH_TOKEN')}
+                const {data} = await $api.post('/token/refresh/', refresh)
                 sessionStorage.setItem('ACCESS_TOKEN', data.access)
                 return $authApi.request(originalRequest)
             } catch (e) {

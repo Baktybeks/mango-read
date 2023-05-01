@@ -9,7 +9,7 @@ import {
     createTheme, FormLabel
 } from "@mui/material"
 import {useDispatch, useSelector} from "react-redux"
-import {setGenreCheckbox, setTypeCheckbox} from "../../store/slices/mangaSlice"
+import {setGenreCheckbox, setTypeCheckbox} from "../../store/slices/filterSlice"
 
 const theme = createTheme({typography: {fontFamily: 'Montserrat', fontSize: '24px'}})
 
@@ -24,9 +24,8 @@ function MuiCheckbox({muiCheckbox, manga}) {
 
     const dispatch = useDispatch()
 
-    const {typeCheckbox, genreCheckbox, typeValue} = useSelector(state => state.mangaReducer)
+    const {typeCheckbox, genreCheckbox} = useSelector(state => state.filterReducer)
     //
-    // console.log("type", typeValue)
     // console.log("genreCheckbox", genreCheckbox)
     // console.log("typeCheckbox", typeCheckbox)
 

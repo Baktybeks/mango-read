@@ -9,7 +9,7 @@ import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {setLoginOrReg, setLogout, setModalActive} from "../../store/slices/usersSlice"
 import {checkAuthApi, logoutApi} from "../../axios/usersApi"
-import {getGenreListApi, getMangaListApi} from "../../axios/mangaApi"
+import {getGenreListApi} from "../../axios/mangaApi"
 import Search from "../search/Search"
 
 function Header() {
@@ -35,7 +35,6 @@ function Header() {
 
     useEffect(() => {
         dispatch(getGenreListApi())
-        dispatch(getMangaListApi(12))
         if (localStorage.getItem('CHECKED')) {
             dispatch(checkAuthApi())
         } else {

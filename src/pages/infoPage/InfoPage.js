@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useNavigate, useParams} from "react-router-dom"
 import classes from "./infoPage.module.css"
 import {useDispatch, useSelector} from "react-redux"
 import {getCardApi, getCommentsApi} from "../../axios/mangaApi"
 import Modal from "../../components/modal/Modal"
 import AddComment from "../../components/addComment/AddComment"
-import {setCommentModalActive} from "../../store/slices/mangaSlice"
+import {setCommentModalActive, setFilteredGenres} from "../../store/slices/mangaSlice"
 import AppPaginationComment from "../../components/appPaginationComment/AppPaginationComment"
 
 function InfoPage() {
@@ -13,11 +13,11 @@ function InfoPage() {
     const dispatch = useDispatch()
     const {id} = useParams()
     const navigate = useNavigate()
-    const {card, commentModalActive, currentComments, genreValue} = useSelector(state => state.mangaReducer)
+    const {card, commentModalActive, currentComments, genreValue, filteredGenres} = useSelector(state => state.mangaReducer)
+    console.log(filteredGenres)
     const {user} = useSelector(state => state.usersReducer)
     const {error} = useSelector(state => state.errorReducer)
     const {preloader} = useSelector(state => state.preloaderReducer)
-    const [filteredGenres, setFilteredGenres] = useState('')
 
     const handleAddComment = () => {
         if (!Object.keys(user).length) {
@@ -28,6 +28,9 @@ function InfoPage() {
     }
 
     const genreNames = () => {
+        if (!genreValue || !card || !card.genre || !Array.isArray(genreValue) || !Array.isArray(card.genre)) {
+            return ""
+        }
         const filteredGenres = genreValue.filter(genres => card.genre.includes(genres.id))
         return filteredGenres.map(genre => genre.title).join(', ')
     }
@@ -35,7 +38,7 @@ function InfoPage() {
     useEffect(() => {
         dispatch(getCardApi(id))
         dispatch(getCommentsApi(id))
-        setFilteredGenres(genreNames())
+        dispatch(setFilteredGenres(genreNames()))
     }, [dispatch, id])
 
     return (
@@ -102,7 +105,8 @@ function InfoPage() {
                                                 :
                                                 <>
                                                     {currentComments.map(comment =>
-                                                        <li className={classes.card__comments_comment}>
+                                                        <li className={classes.card__comments_comment}
+                                                            key={comment.id}>
                                                             <div className={classes.img_box}>
                                                                 <img className={classes.img}
                                                                      src={comment.user.image_file}

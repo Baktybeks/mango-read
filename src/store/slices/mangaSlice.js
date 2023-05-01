@@ -3,15 +3,10 @@ import {createSlice} from "@reduxjs/toolkit"
 const mangaSlice = createSlice({
     name: 'mangaSlice',
     initialState: {
-        typeCheckbox: [],
-        genreCheckbox: [],
-        inputYears: {
-            inp_year_first: 0,
-            inp_year_second: 0
-        },
         manga: true,
         mangaCount: 0,
         genreValue: [],
+        filteredGenres: '',
         typeValue:
             [
                 {id: 1, title: 'Манга'},
@@ -19,10 +14,6 @@ const mangaSlice = createSlice({
                 {id: 3, title: 'Комиксы'},
                 {id: 4, title: 'Маньхуа'}
             ],
-        selectedTypeGenre: {
-            selectedType: [],
-            selectedGenre: []
-        },
         mangaList: [],
         card: {},
         comments: [],
@@ -30,20 +21,11 @@ const mangaSlice = createSlice({
         commentModalActive: false
     },
     reducers: {
-        setTypeCheckbox: (state, action) => {
-            state.typeCheckbox = action.payload
-        },
-        setGenreCheckbox: (state, action) => {
-            state.genreCheckbox = action.payload
-        },
         setGenreValue: (state, action) => {
             state.genreValue = action.payload
         },
-        setYearsManga: (state, action) => {
-            state.inputYears = action.payload
-        },
-        setSelectedTypeGenre: (state, action) => {
-            state.selectedTypeGenre = action.payload
+        setFilteredGenres: (state, action) => {
+            state.filteredGenres = action.payload
         },
         setManga: (state, action) => {
             state.manga = action.payload
@@ -70,18 +52,15 @@ const mangaSlice = createSlice({
 })
 
 export const {
-    setTypeCheckbox,
-    setGenreCheckbox,
     setGenreValue,
-    setYearsManga,
     setManga,
-    setSelectedTypeGenre,
     setMangaList,
     setCard,
     setComments,
     setCommentModalActive,
     setMangaCount,
-    setCurrentComments
+    setCurrentComments,
+    setFilteredGenres
 } = mangaSlice.actions
 
 export default mangaSlice.reducer

@@ -1,0 +1,59 @@
+.search__input, .search__dropdown li {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400; }
+
+.search {
+  width: 342px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 14px 16px;
+  gap: 16px;
+  background: #FFFFFF;
+  border: 2px solid #878787;
+  border-radius: 8px; }
+  .search:focus-within {
+    border: 2px solid #AD02E0; }
+  .search__img {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url("../../assets/images/icon/search.svg") no-repeat; }
+  .search__input {
+    order: 2;
+    border: none;
+    width: 100%;
+    outline: none;
+    text-align: left;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #919191; }
+    .search__input:focus {
+      color: #AD02E0; }
+    .search__input:focus + .search__img {
+      display: none; }
+  .search__dropdown {
+    list-style: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 54px;
+    height: 200px;
+    background-color: white;
+    overflow-y: auto;
+    z-index: 1;
+    box-shadow: 1px 2px 3px #000000, 2px 4px 6px #cccccc;
+    border-radius: 0 5px 5px 5px; }
+    .search__dropdown li {
+      padding: 5px 20px;
+      margin-left: 0;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 16px;
+      color: #919090; }
+      .search__dropdown li:hover {
+        background-color: #F9F9F9FF; }

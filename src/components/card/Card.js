@@ -6,7 +6,7 @@ function Card({card}) {
 
     const navigate = useNavigate()
 
-    const clickHandler = () => navigate(`/info/${card.id}`)
+    const clickHandler = () => navigate(`/info/${card.id}/`)
 
     let sliceName = card.ru_name.slice(0,20)
     if (sliceName.length < card.ru_name.length) {

@@ -3,6 +3,7 @@ import errorReducer from "./slices/errorSlice"
 import preloaderReducer from "./slices/preloaderSlice"
 import usersReducer from "./slices/usersSlice"
 import mangaReducer from "./slices/mangaSlice"
+import filterReducer from "./slices/filterSlice"
 
 
 export const store = configureStore({
@@ -11,5 +12,6 @@ export const store = configureStore({
         preloaderReducer,
         usersReducer,
         mangaReducer,
+        filterReducer
     }
 })

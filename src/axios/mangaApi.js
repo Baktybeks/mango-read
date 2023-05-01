@@ -42,7 +42,7 @@ export const getCardApi = (id) => {
     return async (dispatch) => {
         dispatch(preloaderOn())
         try {
-            const {data} = await $api.get(`v1/manga/${id}`)
+            const {data} = await $api.get(`v1/manga/${id}/`)
             dispatch(setCard(data))
         } catch (e) {
             dispatch(setError(e.message))
