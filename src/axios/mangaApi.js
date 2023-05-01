@@ -27,7 +27,7 @@ export const getMangaListApi = (limit = 0, offset = 0) => {
                         offset,
                     }
                 }
-                )
+            )
             dispatch(setMangaCount(data.count))
             dispatch(setMangaList(data.results))
         } catch (e) {
@@ -65,7 +65,6 @@ export const getCommentsApi = (id) => {
         }
     }
 }
-
 
 export const addCommentApi = (id, text) => {
     return async (dispatch) => {

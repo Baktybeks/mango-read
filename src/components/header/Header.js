@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import classes from "./header.module.css"
 import logo from "../../assets/images/Logo.png"
 import arrow from "../../assets/images/icon/arrow_drop_down.svg"
@@ -7,8 +7,10 @@ import Auth from "../auth/Auth"
 import {links} from "../../links/links"
 import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
-import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice"
-import {logoutApi} from "../../axios/usersApi"
+import {setLoginOrReg, setLogout, setModalActive} from "../../store/slices/usersSlice"
+import {checkAuthApi, logoutApi} from "../../axios/usersApi"
+import {getGenreListApi, getMangaListApi} from "../../axios/mangaApi"
+import Search from "../search/Search"
 
 function Header() {
 
@@ -31,6 +33,16 @@ function Header() {
         dispatch(logoutApi())
     }
 
+    useEffect(() => {
+        dispatch(getGenreListApi())
+        dispatch(getMangaListApi(12))
+        if (localStorage.getItem('CHECKED')) {
+            dispatch(checkAuthApi())
+        } else {
+            dispatch(setLogout())
+        }
+    }, [dispatch])
+
     return (
         <header className={classes.header}>
             <div className={`container ${classes.main}`}>
@@ -41,14 +53,7 @@ function Header() {
                         <div className={classes.subtitle}>Читай мангу с нами</div>
                     </div>
                 </Link>
-                <div className={classes.search}>
-                    <input
-                        className={classes.search__input}
-                        type="search"
-                        placeholder="Placeholder"
-                    />
-                    <span className={classes.search__img}></span>
-                </div>
+                <Search/>
                 <div className={classes.auth}>
                     {isAuth ?
                         <div className={classes.auth__user}>

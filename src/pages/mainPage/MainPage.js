@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Card from "../../components/card/Card"
 import classes from "./mainPage.module.css"
 import MuiCheckbox from "../../components/muiCheckbox/MuiCheckbox"
@@ -9,9 +9,6 @@ import {
     setYearsManga
 } from "../../store/slices/mangaSlice"
 import {useDispatch, useSelector} from "react-redux"
-import {getGenreListApi, getMangaListApi} from "../../axios/mangaApi"
-import {checkAuthApi} from "../../axios/usersApi"
-import {setLogout} from "../../store/slices/usersSlice"
 import AppPaginationManga from "../../components/appPaginationManga/AppPaginationManga"
 
 function MainPage() {
@@ -39,16 +36,6 @@ function MainPage() {
 
     const handleYearsChange = (event) =>
         dispatch(setYearsManga({...inputYears, [event.target.name]: Number(event.target.value)}))
-
-    useEffect(() => {
-        dispatch(getGenreListApi())
-        dispatch(getMangaListApi(12))
-        if (localStorage.getItem('CHECKED')) {
-            dispatch(checkAuthApi())
-        } else {
-            dispatch(setLogout())
-        }
-    }, [dispatch])
 
     const sentTypeGenre = () => {
 

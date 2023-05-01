@@ -27,7 +27,7 @@ function AppPaginationComment() {
 
     useEffect(() => {
         dispatch(setCurrentComments(currentPageData))
-    }, [dispatch, currentPage])
+    }, [dispatch,currentPage])
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom"
 import classes from "./infoPage.module.css"
 import {useDispatch, useSelector} from "react-redux"
@@ -13,11 +13,12 @@ function InfoPage() {
     const dispatch = useDispatch()
     const {id} = useParams()
     const navigate = useNavigate()
-    const {card, commentModalActive, currentComments} = useSelector(state => state.mangaReducer)
-    console.log('currentComments', currentComments)
+    const {card, commentModalActive, currentComments, genreValue} = useSelector(state => state.mangaReducer)
     const {user} = useSelector(state => state.usersReducer)
     const {error} = useSelector(state => state.errorReducer)
     const {preloader} = useSelector(state => state.preloaderReducer)
+    const [filteredGenres, setFilteredGenres] = useState('')
+
     const handleAddComment = () => {
         if (!Object.keys(user).length) {
             alert('Авторизируйтесь')
@@ -25,9 +26,16 @@ function InfoPage() {
             dispatch(setCommentModalActive(true))
         }
     }
+
+    const genreNames = () => {
+        const filteredGenres = genreValue.filter(genres => card.genre.includes(genres.id))
+        return filteredGenres.map(genre => genre.title).join(', ')
+    }
+
     useEffect(() => {
         dispatch(getCardApi(id))
         dispatch(getCommentsApi(id))
+        setFilteredGenres(genreNames())
     }, [dispatch, id])
 
     return (
@@ -55,7 +63,7 @@ function InfoPage() {
                                             <div className={classes.title}>Информация:</div>
                                             <div className={classes.subtitle}>Тип: <span>{card.type}</span></div>
                                             <div className={classes.subtitle}>Год: <span>{card.issue_year}</span></div>
-                                            <div className={classes.subtitle}>Жанр: <span>{card.genre}</span></div>
+                                            <div className={classes.subtitle}>Жанр: <span>{filteredGenres}</span></div>
                                         </div>
                                     </div>
                                 </div>
