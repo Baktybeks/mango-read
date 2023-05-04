@@ -9,16 +9,14 @@ import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {setLoginOrReg, setLogout, setModalActive} from "../../store/slices/usersSlice"
 import {checkAuthApi, logoutApi} from "../../axios/usersApi"
-import {getGenreListApi} from "../../axios/mangaApi"
+import {getAllMangaListApi, getGenreListApi} from "../../axios/mangaApi"
 import Search from "../search/Search"
 
 function Header() {
 
-    const {isAuth, user} = useSelector(state => state.usersReducer)
+    const {isAuth, user, loginOrReg, modalActive} = useSelector(state => state.usersReducer)
 
     const dispatch = useDispatch()
-
-    const {loginOrReg, modalActive} = useSelector (state => state.usersReducer)
 
     const login = () => {
         dispatch(setModalActive(true))
@@ -35,6 +33,7 @@ function Header() {
 
     useEffect(() => {
         dispatch(getGenreListApi())
+        dispatch(getAllMangaListApi())
         if (localStorage.getItem('CHECKED')) {
             dispatch(checkAuthApi())
         } else {

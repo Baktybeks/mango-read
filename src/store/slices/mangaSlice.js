@@ -3,7 +3,6 @@ import {createSlice} from "@reduxjs/toolkit"
 const mangaSlice = createSlice({
     name: 'mangaSlice',
     initialState: {
-        manga: true,
         mangaCount: 0,
         genreValue: [],
         filteredGenres: '',
@@ -15,10 +14,8 @@ const mangaSlice = createSlice({
                 {id: 4, title: 'Маньхуа'}
             ],
         mangaList: [],
-        card: {},
-        comments: [],
-        currentComments: [],
-        commentModalActive: false
+        allMangaList: [],
+
     },
     reducers: {
         setGenreValue: (state, action) => {
@@ -27,40 +24,24 @@ const mangaSlice = createSlice({
         setFilteredGenres: (state, action) => {
             state.filteredGenres = action.payload
         },
-        setManga: (state, action) => {
-            state.manga = action.payload
-        },
         setMangaList: (state, action) => {
             state.mangaList = action.payload
         },
+        setAllMangaList: (state, action) => {
+            state.allMangaList = action.payload
+        },
         setMangaCount: (state, action) => {
             state.mangaCount = action.payload
-        },
-        setCard: (state, action) => {
-            state.card = action.payload
-        },
-        setComments: (state, action) => {
-            state.comments = action.payload
-        },
-        setCurrentComments: (state, action) => {
-            state.currentComments = action.payload
-        },
-        setCommentModalActive: (state, action) => {
-            state.commentModalActive = action.payload
         }
     }
 })
 
 export const {
     setGenreValue,
-    setManga,
     setMangaList,
-    setCard,
-    setComments,
-    setCommentModalActive,
     setMangaCount,
-    setCurrentComments,
-    setFilteredGenres
+    setFilteredGenres,
+    setAllMangaList
 } = mangaSlice.actions
 
 export default mangaSlice.reducer

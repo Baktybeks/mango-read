@@ -2,7 +2,7 @@ import React from 'react'
 import classes from "./modal.module.css"
 import {setModalActive} from "../../store/slices/usersSlice"
 import {useDispatch} from "react-redux"
-import {setCommentModalActive} from "../../store/slices/mangaSlice"
+import {setCommentModalActive} from "../../store/slices/infoSlice"
 
 function Modal({active, commentOrUser, children}) {
     const dispatch = useDispatch()

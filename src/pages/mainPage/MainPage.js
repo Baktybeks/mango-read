@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import Card from "../../components/card/Card"
 import classes from "./mainPage.module.css"
 import MuiCheckbox from "../../components/muiCheckbox/MuiCheckbox"
-import {setManga} from "../../store/slices/mangaSlice"
 import {useDispatch, useSelector} from "react-redux"
 import AppPaginationManga from "../../components/appPaginationManga/AppPaginationManga"
 import {getMangaListApi} from "../../axios/mangaApi"
@@ -11,19 +10,19 @@ import {setGenreCheckbox, setSelectedInputs, setTypeCheckbox} from "../../store/
 function MainPage() {
 
     const dispatch = useDispatch()
-
-    const {manga, genreValue, typeValue, mangaList} = useSelector(state => state.mangaReducer)
+    const [manga, setManga] = useState(true)
+    const [inputYears, setInputYears] = useState({inp_year_first: '', inp_year_second: ''})
+    const {genreValue, typeValue, mangaList} = useSelector(state => state.mangaReducer)
     const {typeCheckbox, genreCheckbox, selectedInputs} = useSelector(state => state.filterReducer)
-    console.log('selectedTypeGenre', selectedInputs)
+    // console.log(selectedInputs)
     const {preloader} = useSelector(state => state.preloaderReducer)
     const {error} = useSelector(state => state.errorReducer)
-    const [inputYears, setInputYears] = useState({inp_year_first:'', inp_year_second: ''})
 
     const handleClearType = () => {
         dispatch(setTypeCheckbox([]))
-        setInputYears({inp_year_first:'', inp_year_second: ''})
+        setInputYears({inp_year_first: '', inp_year_second: ''})
         dispatch(setSelectedInputs({
-            ...selectedInputs, selectedYears: {inp_year_first:'', inp_year_second: ''}, selectedType: []
+            ...selectedInputs, selectedYears: {inp_year_first: '', inp_year_second: ''}, selectedType: []
         }))
     }
     const handleClearGenre = () => {
@@ -33,8 +32,7 @@ function MainPage() {
         }))
     }
 
-
-    const followBtn = () => dispatch(setManga(!manga))
+    const followBtn = () => setManga(!manga)
 
     const handleYearsChange = (event) => setInputYears({
         ...inputYears,
@@ -42,30 +40,24 @@ function MainPage() {
     })
 
     const sentTypeGenre = () => {
-        let sentTypeCheckbox = []
-        let sentGenreCheckbox = []
-        {
-            (manga ? typeValue : genreValue).map(check => {
-                if (manga) {
-                    if ((manga ? typeCheckbox : genreCheckbox).includes(check.title)) {
-                        sentTypeCheckbox.push(check.title)
-                    }
-                } else {
-                    if ((manga ? typeCheckbox : genreCheckbox).includes(check.title)) {
-                        sentGenreCheckbox.push(check.id)
-                    }
-                }
-            })
-        }
-        (manga ?
-            dispatch(setSelectedInputs({
+        let sentTypeCheckbox = [];
+        let sentGenreCheckbox = [];
+        (manga ? typeValue : genreValue).filter(check => {
+            if (manga) {
+                return typeCheckbox.includes(check.title);
+            } else {
+                return genreCheckbox.includes(check.title);
+            }
+        }).map(filteredCheck => {
+            return manga ? sentTypeCheckbox.push(filteredCheck.title) : sentGenreCheckbox.push(filteredCheck.id)
+        });
+        manga
+            ? dispatch(setSelectedInputs({
                 ...selectedInputs, "selectedType": sentTypeCheckbox, "selectedYears": inputYears
             }))
-            :
-            dispatch(setSelectedInputs({
+            : dispatch(setSelectedInputs({
                 ...selectedInputs, "selectedGenre": sentGenreCheckbox
-            }))
-        )
+            }));
     }
 
     useEffect(() => {

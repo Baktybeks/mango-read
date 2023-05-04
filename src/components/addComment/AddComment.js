@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import classes from "./addComment.module.css"
 import {useDispatch, useSelector} from "react-redux"
 import {addCommentApi} from "../../axios/mangaApi"
-import {setCommentModalActive} from "../../store/slices/mangaSlice"
+import {setCommentModalActive} from "../../store/slices/infoSlice"
 
 
 function AddComment({id}) {

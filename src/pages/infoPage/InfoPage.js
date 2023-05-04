@@ -2,43 +2,32 @@ import React, {useEffect} from 'react'
 import {useNavigate, useParams} from "react-router-dom"
 import classes from "./infoPage.module.css"
 import {useDispatch, useSelector} from "react-redux"
-import {getCardApi, getCommentsApi} from "../../axios/mangaApi"
 import Modal from "../../components/modal/Modal"
 import AddComment from "../../components/addComment/AddComment"
-import {setCommentModalActive, setFilteredGenres} from "../../store/slices/mangaSlice"
+import {setCommentModalActive} from "../../store/slices/infoSlice"
 import AppPaginationComment from "../../components/appPaginationComment/AppPaginationComment"
+import {getInfoApi} from "../../axios/mangaApi"
 
 function InfoPage() {
 
     const dispatch = useDispatch()
     const {id} = useParams()
     const navigate = useNavigate()
-    const {card, commentModalActive, currentComments, genreValue, filteredGenres} = useSelector(state => state.mangaReducer)
-    console.log(filteredGenres)
+    const {filteredGenres} = useSelector(state => state.mangaReducer)
+    const {card, commentModalActive, currentComments} = useSelector(state => state.infoReducer)
     const {user} = useSelector(state => state.usersReducer)
     const {error} = useSelector(state => state.errorReducer)
-    const {preloader} = useSelector(state => state.preloaderReducer)
+    const {preloaderCard, preloaderComments} = useSelector(state => state.preloaderReducer)
 
     const handleAddComment = () => {
-        if (!Object.keys(user).length) {
+        if (!user || !Object.keys(user).length) {
             alert('Авторизируйтесь')
         } else {
             dispatch(setCommentModalActive(true))
         }
     }
-
-    const genreNames = () => {
-        if (!genreValue || !card || !card.genre || !Array.isArray(genreValue) || !Array.isArray(card.genre)) {
-            return ""
-        }
-        const filteredGenres = genreValue.filter(genres => card.genre.includes(genres.id))
-        return filteredGenres.map(genre => genre.title).join(', ')
-    }
-
     useEffect(() => {
-        dispatch(getCardApi(id))
-        dispatch(getCommentsApi(id))
-        dispatch(setFilteredGenres(genreNames()))
+            dispatch(getInfoApi(id))
     }, [dispatch, id])
 
     return (
@@ -47,7 +36,7 @@ function InfoPage() {
                 <span className={classes.card__back_arrow_left}></span> Назад
             </button>
             {
-                preloader
+                preloaderCard
                     ?
                     <h1 className={classes.loading}>Loading......</h1>
                     :
@@ -95,7 +84,7 @@ function InfoPage() {
                                 </div>
                                 <ul>
                                     {
-                                        preloader
+                                        preloaderComments
                                             ?
                                             <h1 className={classes.loading}>Loading......</h1>
                                             :
@@ -130,7 +119,7 @@ function InfoPage() {
                                     }
                                 </ul>
                                 <div className={classes.pagination}>
-                                    <AppPaginationComment/>
+                                    <AppPaginationComment id={id}/>
                                 </div>
                             </div>
                         </>

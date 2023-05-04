@@ -3,18 +3,19 @@ import {createSlice} from "@reduxjs/toolkit"
 const preloaderSlice = createSlice({
     name: 'preloaderSlice',
     initialState: {
-        preloader: false
+        preloader: false,
+        preloaderCard: false,
+        preloaderComments: false,
     },
     reducers: {
-        preloaderOn: (state) => {
-            state.preloader = true
-        },
-        preloaderOff: (state) => {
-            state.preloader = false
-        },
+        preloader: (state,action) => {
+            state.preloader = action.payload.preloader
+            state.preloaderComments = action.payload.preloaderComments
+            state.preloaderCard = action.payload.preloaderCard
+        }
     }
 })
 
-export const {preloaderOn,preloaderOff} = preloaderSlice.actions
+export const {preloader} = preloaderSlice.actions
 
 export default preloaderSlice.reducer

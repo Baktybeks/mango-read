@@ -3,7 +3,7 @@ import {Pagination, PaginationItem} from "@mui/material"
 import {useDispatch, useSelector} from "react-redux"
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
-import {setCurrentComments} from "../../store/slices/mangaSlice"
+import {setCurrentComments} from "../../store/slices/infoSlice"
 
 function AppPaginationComment() {
 
@@ -11,7 +11,7 @@ function AppPaginationComment() {
 
     const itemsPerPage = 3
 
-    const {comments} = useSelector(state => state.mangaReducer)
+    const {comments} = useSelector(state => state.infoReducer)
 
     const totalPages = Math.ceil(comments.length / itemsPerPage)
 

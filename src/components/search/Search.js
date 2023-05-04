@@ -18,13 +18,7 @@ function Search() {
     const [search, setSearch] = useState([])
 
     const searchApi = async () => {
-        const {data} = await $api.get(`v1/manga/`,
-            {
-                params: {
-                    search: debounced
-                }
-            }
-        )
+        const {data} = await $api.get(`v1/manga/`,{params: {search: debounced}})
         setSearch(data)
     }
 
@@ -55,7 +49,7 @@ function Search() {
                             <li
                                 key={search.id}
                                 onClick={() => {
-                                    navigate(`info/${search.id}`)
+                                    navigate(`info/${search.id}/`)
                                     setDropdown(false)
                                     setInputValue('')
                                 }}
