@@ -8,6 +8,7 @@ export const getMangaListApi = () => {
         dispatch(preloaderOn())
         try {
             const {data} = await $api.get(`v1/manga/`)
+            console.log(data)
             dispatch(setFilterManga(data))
         } catch (e) {
             dispatch(setError(e.message))
