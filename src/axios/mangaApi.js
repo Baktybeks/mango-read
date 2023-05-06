@@ -1,12 +1,15 @@
 import {$api, $authApi} from "./index"
 import {setError} from "../store/slices/errorSlice"
 import {
-    setAllMangaList,
     setFilteredGenres,
     setGenreValue,
     setMangaCount,
     setMangaList
 } from "../store/slices/mangaSlice"
+
+import {
+    setAllMangaList
+} from "../store/slices/filterSlice"
 import {setCard, setComments} from "../store/slices/infoSlice"
 import {preloader} from "../store/slices/preloaderSlice"
 
@@ -49,8 +52,6 @@ export const getAllMangaListApi = () => {
     }
 }
 
-
-
 const filteredGenres = (genreValue, card) => {
     return genreValue.filter(genres => card.genre.includes(genres.id)).map(genre => genre.title).join(', ')
 }
@@ -81,8 +82,10 @@ export const addCommentApi = (id, text) => {
         try {
             const response = await $authApi.post(`v1/manga/${id}/add-comment/`, {id, text})
             console.log(response)
-            alert('Вы успешно отправили комментарий')
-            dispatch(getInfoApi(id))
+            if (response.status === 201) {
+                alert('Вы успешно отправили комментарий')
+                dispatch(getInfoApi(id))
+            }
         } catch (e) {
             console.log(e)
         }

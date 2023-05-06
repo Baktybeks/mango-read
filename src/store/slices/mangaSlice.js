@@ -14,8 +14,6 @@ const mangaSlice = createSlice({
                 {id: 4, title: 'Маньхуа'}
             ],
         mangaList: [],
-        allMangaList: [],
-
     },
     reducers: {
         setGenreValue: (state, action) => {
@@ -26,9 +24,6 @@ const mangaSlice = createSlice({
         },
         setMangaList: (state, action) => {
             state.mangaList = action.payload
-        },
-        setAllMangaList: (state, action) => {
-            state.allMangaList = action.payload
         },
         setMangaCount: (state, action) => {
             state.mangaCount = action.payload
@@ -41,7 +36,6 @@ export const {
     setMangaList,
     setMangaCount,
     setFilteredGenres,
-    setAllMangaList
 } = mangaSlice.actions
 
 export default mangaSlice.reducer

@@ -14,6 +14,7 @@ const filterSlice = createSlice({
                 inp_year_second: 0
             },
         },
+        allMangaList: [],
     },
     reducers: {
         setFilterManga: (state, action) => {
@@ -28,6 +29,9 @@ const filterSlice = createSlice({
         setSelectedInputs: (state, action) => {
             state.selectedInputs = action.payload
         },
+        setAllMangaList: (state, action) => {
+            state.allMangaList = action.payload
+        },
     }
 })
 
@@ -35,8 +39,9 @@ export const {
     setFilterManga,
     setTypeCheckbox,
     setGenreCheckbox,
-    setYearsManga,
-    setSelectedInputs
+    setSelectedInputs,
+    setIsFilter,
+    setAllMangaList
 } = filterSlice.actions
 
 export default filterSlice.reducer

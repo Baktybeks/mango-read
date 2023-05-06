@@ -10,13 +10,26 @@ import {setGenreCheckbox, setSelectedInputs, setTypeCheckbox} from "../../store/
 function MainPage() {
 
     const dispatch = useDispatch()
-    const [manga, setManga] = useState(true)
+
+
     const [inputYears, setInputYears] = useState({inp_year_first: '', inp_year_second: ''})
     const {genreValue, typeValue, mangaList} = useSelector(state => state.mangaReducer)
     const {typeCheckbox, genreCheckbox, selectedInputs} = useSelector(state => state.filterReducer)
-    // console.log(selectedInputs)
     const {preloader} = useSelector(state => state.preloaderReducer)
     const {error} = useSelector(state => state.errorReducer)
+
+    const [manga, setManga] = useState(true)
+    const [isEmptyType, setIsEmptyType] = useState(true)
+    const [isEmptyGenre, setIsEmptyGenre] = useState(true)
+    const [isFilter, setIsFilter] = useState(true)
+
+    const isEmptyFilter = () => {
+        isEmptyType && isEmptyGenre
+            ? setIsFilter(true)
+            : setIsFilter(false)
+    }
+
+
 
     const handleClearType = () => {
         dispatch(setTypeCheckbox([]))
@@ -24,12 +37,15 @@ function MainPage() {
         dispatch(setSelectedInputs({
             ...selectedInputs, selectedYears: {inp_year_first: '', inp_year_second: ''}, selectedType: []
         }))
+        setIsEmptyType(true)
     }
+
     const handleClearGenre = () => {
         dispatch(setGenreCheckbox([]))
         dispatch(setSelectedInputs({
             ...selectedInputs, "selectedGenre": []
         }))
+        setIsEmptyGenre(true)
     }
 
     const followBtn = () => setManga(!manga)
@@ -40,29 +56,32 @@ function MainPage() {
     })
 
     const sentTypeGenre = () => {
-        let sentTypeCheckbox = [];
+        let sentTypeCheckbox = []
         let sentGenreCheckbox = [];
         (manga ? typeValue : genreValue).filter(check => {
-            if (manga) {
-                return typeCheckbox.includes(check.title);
-            } else {
-                return genreCheckbox.includes(check.title);
-            }
+            return manga ? typeCheckbox.includes(check.title) : genreCheckbox.includes(check.title)
         }).map(filteredCheck => {
             return manga ? sentTypeCheckbox.push(filteredCheck.title) : sentGenreCheckbox.push(filteredCheck.id)
-        });
-        manga
-            ? dispatch(setSelectedInputs({
+        })
+        if (manga) {
+            (sentTypeCheckbox.length || inputYears.inp_year_first || inputYears.inp_year_second)
+                ? setIsEmptyType(false)
+                : setIsEmptyType(true)
+            dispatch(setSelectedInputs({
                 ...selectedInputs, "selectedType": sentTypeCheckbox, "selectedYears": inputYears
             }))
-            : dispatch(setSelectedInputs({
+        } else {
+            (sentGenreCheckbox.length) ? setIsEmptyGenre(false) : setIsEmptyGenre(true)
+            dispatch(setSelectedInputs({
                 ...selectedInputs, "selectedGenre": sentGenreCheckbox
-            }));
+            }))
+        }
     }
 
     useEffect(() => {
         dispatch(getMangaListApi(12))
-    }, [dispatch])
+        isEmptyFilter()
+    }, [dispatch, isEmptyType, isEmptyGenre])
 
 
     // const numberInput = 2021
@@ -120,7 +139,7 @@ function MainPage() {
             </section>
         </div>
         <div className={classes.pagination}>
-            <AppPaginationManga limit={12}/>
+            {isFilter ? <AppPaginationManga limit={12}/> : <AppPaginationManga limit={6}/>}
         </div>
     </main>)
 }
