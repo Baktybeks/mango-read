@@ -41,6 +41,6 @@ const usersSlice = createSlice({
     }
 })
 
-export const {setLoginOrReg, setModalActive, setIsAuth, getUser, setLogin, setLogout} = usersSlice.actions
+export const {setLoginOrReg, setModalActive, getUser, setLogin, setLogout} = usersSlice.actions
 
 export default usersSlice.reducer

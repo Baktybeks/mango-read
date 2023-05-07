@@ -19,7 +19,7 @@ function AppPaginationFilteredManga() {
     const filteredManga = allMangaList.filter((item) => {
         const isType = selectedType.length === 0 || selectedType.includes(item.type)
         const isYear = (!inp_year_first && !inp_year_second) ||
-            item.issue_year >= inp_year_first && item.issue_year <= inp_year_second
+            (item.issue_year >= inp_year_first && item.issue_year <= inp_year_second)
         const isGenre = selectedGenre.length === 0 || selectedGenre.every(genre => item.genre.includes(genre));
         return isGenre && isType && isYear
     })

@@ -3,7 +3,7 @@ import {useNavigate, useParams} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {getInfoApi} from "../../axios/mangaApi"
 
-import classes from "./infoPage.module.css"
+import classes from "./infoPage.module.sass"
 
 import {setCommentModalActive} from "../../store/slices/infoSlice"
 

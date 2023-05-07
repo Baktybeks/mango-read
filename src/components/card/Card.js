@@ -1,6 +1,6 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom"
-import classes from "./card.module.css"
+import classes from "./card.module.sass"
 import {setGenreCheckbox, setSelectedInputs, setTypeCheckbox} from "../../store/slices/filterSlice"
 import {useDispatch, useSelector} from "react-redux"
 

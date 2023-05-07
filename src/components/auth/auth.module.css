@@ -1,162 +1,193 @@
 .auth__title .login, .auth__title .reg, .auth__form_img label, .auth__form_text_box .text, .auth__form_text_box .checkbox, .auth__form_text_box > button {
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 400; }
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
 
 .auth {
-  margin: 0 auto;
-  width: 603px;
-  background: #FFFFFF;
-  border-radius: 30px; }
+    margin: 0 auto;
+    width: 603px;
+    background: #FFFFFF;
+    border-radius: 30px;
+}
 
 .auth__exit {
-  margin: 31px 0 0 523px;
-  vertical-align: bottom;
-  cursor: pointer; }
+    margin: 31px 0 0 523px;
+    vertical-align: bottom;
+    cursor: pointer;
+}
 
 .auth__title {
-  padding-top: 12px;
-  margin: 0 auto;
-  width: 500px;
-  display: flex;
-  gap: 32px; }
+    padding-top: 12px;
+    margin: 0 auto;
+    width: 500px;
+    display: flex;
+    gap: 32px;
+}
 
 .auth__title .login, .auth__title .reg {
-  font-size: 24px;
-  line-height: 35px;
-  color: #000000;
-  cursor: pointer; }
+    font-size: 24px;
+    line-height: 35px;
+    color: #000000;
+    cursor: pointer;
+}
 
 .auth__title .login.active, .auth__title .reg.active {
-  border-bottom: 5px solid #AD02E0;
-  z-index: 1; }
+    border-bottom: 5px solid #AD02E0;
+    z-index: 1;
+}
 
 .auth__divider {
-  position: relative;
-  margin: 0 auto; }
+    position: relative;
+    margin: 0 auto;
+}
 
 .auth__divider_line {
-  background-color: #878787;
-  border-radius: 2px;
-  width: 100%;
-  height: 2px; }
+    background-color: #878787;
+    border-radius: 2px;
+    width: 100%;
+    height: 2px;
+}
 
 .auth__form {
-  width: 500px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center; }
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .auth__form.login {
-  padding-bottom: 50px; }
+    padding-bottom: 50px;
+}
 
 .auth__form.reg {
-  padding-bottom: 58px; }
+    padding-bottom: 58px;
+}
 
 .auth__form_img {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center; }
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .auth__form_img img {
-  width: 181px;
-  height: 181px;
-  border-radius: 50%;
-  object-fit: cover; }
+    width: 181px;
+    height: 181px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 .auth__form_img input[type="file"] {
-  display: none; }
+    display: none;
+}
 
 .auth__form_img label {
-  margin-top: 21px;
-  font-size: 16px;
-  line-height: 20px;
-  text-transform: uppercase;
-  color: #000000;
-  cursor: pointer; }
+    margin-top: 21px;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #000000;
+    cursor: pointer;
+}
 
 .auth__form_text_box {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px; }
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
 
 .auth__form_text_box.login {
-  margin-top: 45px; }
+    margin-top: 45px;
+}
 
 .auth__form_text_box.reg {
-  margin-top: 40px; }
+    margin-top: 40px;
+}
 
 .auth__form_text_box .text {
-  padding: 0 10px;
-  gap: 10px;
-  width: 100%;
-  height: 52px;
-  border: 1px solid #000000;
-  border-radius: 8px;
-  font-size: 24px;
-  line-height: 35px;
-  color: #000000; }
+    padding: 0 10px;
+    gap: 10px;
+    width: 100%;
+    height: 52px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    font-size: 24px;
+    line-height: 35px;
+    color: #000000;
+}
 
 .auth__form_text_box .text::placeholder {
-  color: #878787; }
+    color: #878787;
+}
 
 .auth__form_text_box .text:focus {
-  outline: 1px solid #AD02E0; }
+    outline: 1px solid #AD02E0;
+}
 
 .auth__form_text_box .checkbox {
-  width: 100%; }
+    width: 100%;
+}
 
 .auth__form_text_box .checkbox__label {
-  gap: 10px;
-  display: flex;
-  cursor: pointer; }
+    gap: 10px;
+    display: flex;
+    cursor: pointer;
+}
 
 .auth__form_text_box .checkbox__label_title {
-  font-size: 24px;
-  line-height: 35px;
-  color: #878787; }
+    font-size: 24px;
+    line-height: 35px;
+    color: #878787;
+}
 
 .auth__form_text_box .checkbox__label_input {
-  width: 100px;
-  display: none; }
+    width: 100px;
+    display: none;
+}
 
 .auth__form_text_box .checkbox__box {
-  width: 35px;
-  height: 35px;
-  border: 2px solid #AD02E0;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+    width: 35px;
+    height: 35px;
+    border: 2px solid #AD02E0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .auth__form_text_box .checkbox__box_tick {
-  display: block;
-  width: 27px;
-  height: 19px;
-  background-image: url("../../assets/images/icon/tick.svg");
-  background-repeat: no-repeat; }
+    display: block;
+    width: 27px;
+    height: 19px;
+    background-image: url("../../assets/images/icon/tick.svg");
+    background-repeat: no-repeat;
+}
 
 .auth__form_text_box .checkbox__box.checked {
-  background-color: #AD02E0; }
+    background-color: #AD02E0;
+}
 
 .auth__form_text_box > button {
-  width: 100%;
-  height: 50px;
-  background: #AD02E0;
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 20px;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  cursor: pointer; }
+    width: 100%;
+    height: 50px;
+    background: #AD02E0;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    cursor: pointer;
+}
 
 .auth__form_text.login {
-  margin-top: 45px; }
+    margin-top: 45px;
+}
 
 .auth__form_text.reg {
-  margin-top: 40px; }
+    margin-top: 40px;
+}

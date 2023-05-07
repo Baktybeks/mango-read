@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import classes from "./header.module.css"
+import classes from "./header.module.sass"
 import logo from "../../assets/images/Logo.png"
 import arrow from "../../assets/images/icon/arrow_drop_down.svg"
 import Modal from "../modal/Modal"
@@ -11,6 +11,7 @@ import {setLoginOrReg, setLogout, setModalActive} from "../../store/slices/users
 import {checkAuthApi, logoutApi} from "../../axios/usersApi"
 import {getAllMangaListApi, getGenreListApi} from "../../axios/mangaApi"
 import Search from "../search/Search"
+import {Popover, Typography} from "@mui/material"
 
 function Header() {
 
@@ -30,6 +31,15 @@ function Header() {
     const logOut = () => {
         dispatch(logoutApi())
     }
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const handlePopoverOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handlePopoverClose = () => {
+        setAnchorEl(null);
+    };
+    const open = Boolean(anchorEl);
 
     useEffect(() => {
         dispatch(getGenreListApi())
@@ -60,8 +70,37 @@ function Header() {
                             </div>
                             <div className={classes.auth__user_login}>
                                 <img src={user.image_file} alt="profileImg" className={classes.auth__user_login_img}/>
-                                <div className={classes.auth__user_login_dropdown} onClick={logOut}>
-                                    <img src={arrow} alt="arrow"/>
+                                <div className={classes.auth__user_login_dropdown}>
+                                    <Typography
+                                        aria-owns={open ? 'mouse-over-popover' : undefined}
+                                        aria-haspopup="true"
+                                        onMouseEnter={handlePopoverOpen}
+                                        onMouseLeave={handlePopoverClose}
+                                        onClick={logOut}
+                                        sx={{pt: 3, pb:3}}
+                                    >
+                                        <img src={arrow} alt="arrow"/>
+                                    </Typography>
+                                    <Popover
+                                        id="mouse-over-popover"
+                                        sx={{
+                                            pointerEvents: 'none',
+                                        }}
+                                        open={open}
+                                        anchorEl={anchorEl}
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'left',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'left',
+                                        }}
+                                        onClose={handlePopoverClose}
+                                        disableRestoreFocus
+                                    >
+                                        <Typography sx={{ fontFamily: 'Montserrat', fontSize: '24px' }}>Выход</Typography>
+                                    </Popover>
                                 </div>
                             </div>
                         </div>

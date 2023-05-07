@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import classes from "./addComment.module.css"
+import classes from "./addComment.module.sass"
 import {useDispatch, useSelector} from "react-redux"
 import {addCommentApi} from "../../axios/mangaApi"
 import {setCommentModalActive} from "../../store/slices/infoSlice"

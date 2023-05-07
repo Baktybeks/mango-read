@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
-import classes from "./auth.module.css"
+import classes from "./auth.module.sass"
 import profileImg from "../../assets/images/profilephoto.png"
 import exit from "../../assets/images/exit.svg"
 import {useDispatch} from "react-redux"
 import {setLoginOrReg, setModalActive} from "../../store/slices/usersSlice"
 import {regApi, signInApi} from "../../axios/usersApi"
+
+const passwordRegExp = /^.{8,40}$/
+const userRegExp = /^.{10,50}$/
 
 function Auth({login}) {
     const dispatch = useDispatch()
@@ -22,9 +25,7 @@ function Auth({login}) {
         setLoginMyCheck(event.target.checked)
     }
 
-
     const isLoginFormValid = () => loginUsername && loginPassword
-    const isRegFormValid = () => regUsername && regNickname && regPassword && regImage
 
     const submitLoginHandler = (e) => {
         e.preventDefault()
@@ -36,17 +37,24 @@ function Auth({login}) {
     }
     const submitRegHandler = async (e) => {
         e.preventDefault()
-
-        if (isRegFormValid()) {
-            const formData = new FormData()
-            formData.append('username', regUsername)
-            formData.append('nickname', regNickname)
-            formData.append('image_file', regImage)
-            formData.append('password', regPassword)
-            dispatch(regApi(formData))
-        } else {
-            alert('Введите все данные')
+        if (!userRegExp.test(regUsername)) {
+            return alert("Ваш Username должен содержать не менее 10 символов")
         }
+        if (!userRegExp.test(regNickname)) {
+            return alert("Ваш Nickname должен содержать не менее 10 символов")
+        }
+        if (!passwordRegExp.test(regPassword)) {
+            return alert("Ваш пароль должен содержать не менее 8 символов")
+        }
+        if (!regImage) {
+            return alert("добавьте фотографию")
+        }
+        const formData = new FormData()
+        formData.append('username', regUsername)
+        formData.append('nickname', regNickname)
+        formData.append('image_file', regImage)
+        formData.append('password', regPassword)
+        dispatch(regApi(formData))
     }
 
     return (
@@ -162,7 +170,6 @@ function Auth({login}) {
                         </div>
                     </form>
             }
-
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from "./modal.module.css"
+import classes from "./modal.module.sass"
 import {setModalActive} from "../../store/slices/usersSlice"
 import {useDispatch} from "react-redux"
 import {setCommentModalActive} from "../../store/slices/infoSlice"

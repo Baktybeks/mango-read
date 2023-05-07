@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import classes from "./mainPage.module.css"
+import classes from "./mainPage.module.sass"
 
 import {getMangaListApi} from "../../axios/mangaApi"
 
