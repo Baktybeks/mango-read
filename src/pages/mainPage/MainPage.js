@@ -6,15 +6,15 @@ import {useDispatch, useSelector} from "react-redux"
 import AppPaginationManga from "../../components/appPaginationManga/AppPaginationManga"
 import {getMangaListApi} from "../../axios/mangaApi"
 import {setGenreCheckbox, setSelectedInputs, setTypeCheckbox} from "../../store/slices/filterSlice"
+import AppPaginationFilteredManga from "../../components/appPaginationFilteredManga/AppPaginationFilteredManga"
 
 function MainPage() {
 
     const dispatch = useDispatch()
 
-
     const [inputYears, setInputYears] = useState({inp_year_first: '', inp_year_second: ''})
     const {genreValue, typeValue, mangaList} = useSelector(state => state.mangaReducer)
-    const {typeCheckbox, genreCheckbox, selectedInputs} = useSelector(state => state.filterReducer)
+    const {typeCheckbox, genreCheckbox, selectedInputs, filteredManga} = useSelector(state => state.filterReducer)
     const {preloader} = useSelector(state => state.preloaderReducer)
     const {error} = useSelector(state => state.errorReducer)
 
@@ -28,8 +28,6 @@ function MainPage() {
             ? setIsFilter(true)
             : setIsFilter(false)
     }
-
-
 
     const handleClearType = () => {
         dispatch(setTypeCheckbox([]))
@@ -51,8 +49,7 @@ function MainPage() {
     const followBtn = () => setManga(!manga)
 
     const handleYearsChange = (event) => setInputYears({
-        ...inputYears,
-        [event.target.name]: Number(event.target.value)
+        ...inputYears, [event.target.name]: Number(event.target.value)
     })
 
     const sentTypeGenre = () => {
@@ -82,14 +79,6 @@ function MainPage() {
         dispatch(getMangaListApi(12))
         isEmptyFilter()
     }, [dispatch, isEmptyType, isEmptyGenre])
-
-
-    // const numberInput = 2021
-    // if (selectedInputs.selectedYears.inp_year_first <= numberInput && numberInput <= selectedInputs.selectedYears.inp_year_second) {
-    //     console.log(numberInput, 'в интервале')
-    // } else {
-    //     console.log(numberInput, 'не в интервале')
-    // }
 
     return (<main className={`container ${classes.main}`}>
         <div className={classes.main_box}>
@@ -134,12 +123,17 @@ function MainPage() {
                 </div>
             </aside>
             <section className={classes.main__card}>
-                {preloader ? <h1 className={classes.loading}>Loading......</h1> : error ?
-                    <p>{error}</p> : mangaList.map(card => <Card key={card.id} card={card}/>)}
+                {preloader ?
+                    <h1 className={classes.loading}>Loading......</h1>
+                    :
+                    error
+                        ?
+                        <p>{error}</p>
+                        : (isFilter ? mangaList : filteredManga).map(card => <Card key={card.id} card={card}/>)}
             </section>
         </div>
         <div className={classes.pagination}>
-            {isFilter ? <AppPaginationManga limit={12}/> : <AppPaginationManga limit={6}/>}
+            {isFilter ? <AppPaginationManga limit={12}/> : <AppPaginationFilteredManga/>}
         </div>
     </main>)
 }

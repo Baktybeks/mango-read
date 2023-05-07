@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit"
 const filterSlice = createSlice({
     name: 'mangaSlice',
     initialState: {
-        filterManga: [],
+        filteredManga: [],
         typeCheckbox: [],
         genreCheckbox: [],
         selectedInputs: {
@@ -17,8 +17,8 @@ const filterSlice = createSlice({
         allMangaList: [],
     },
     reducers: {
-        setFilterManga: (state, action) => {
-            state.filterManga = action.payload
+        setFilteredManga: (state, action) => {
+            state.filteredManga = action.payload
         },
         setTypeCheckbox: (state, action) => {
             state.typeCheckbox = action.payload
@@ -36,11 +36,10 @@ const filterSlice = createSlice({
 })
 
 export const {
-    setFilterManga,
+    setFilteredManga,
     setTypeCheckbox,
     setGenreCheckbox,
     setSelectedInputs,
-    setIsFilter,
     setAllMangaList
 } = filterSlice.actions
 
