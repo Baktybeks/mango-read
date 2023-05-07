@@ -1,4 +1,4 @@
-.main__aside_manga_type, .main__aside_manga_genre, .main__aside_types, .main__aside_years .input, .main__aside_btn .btn {
+.main__aside_manga_type, .main__aside_manga_genre, .main__aside_types, .main__aside_years .input, .main__aside_btn .btn, .main__card .loading {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400; }

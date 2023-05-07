@@ -8,10 +8,10 @@ import {
 } from "../store/slices/mangaSlice"
 
 import {
-    setAllMangaList
+    setAllMangaList, setFilteredManga
 } from "../store/slices/filterSlice"
 import {setCard, setComments} from "../store/slices/infoSlice"
-import {preloader} from "../store/slices/preloaderSlice"
+import {preloader, setPreloaderCard, setPreloaderFilter} from "../store/slices/preloaderSlice"
 
 
 export const getGenreListApi = () => {
@@ -28,7 +28,7 @@ export const getGenreListApi = () => {
 
 export const getMangaListApi = (limit = 0, offset = 0) => {
     return async (dispatch) => {
-        dispatch(preloader({preloader: true}))
+        dispatch(preloader(true))
         try {
             const {data} = await $api.get(`v1/manga/`, {params: {limit, offset,}})
             dispatch(setMangaCount(data.count))
@@ -36,18 +36,22 @@ export const getMangaListApi = (limit = 0, offset = 0) => {
         } catch (e) {
             dispatch(setError(e.message))
         } finally {
-            dispatch(preloader({preloader: false}))
+            dispatch(preloader(false))
         }
     }
 }
 
 export const getAllMangaListApi = () => {
     return async (dispatch) => {
+        dispatch(setPreloaderFilter(true))
         try {
             const {data} = await $api.get(`v1/manga/`)
             dispatch(setAllMangaList(data))
+            dispatch(setFilteredManga(data))
         } catch (e) {
             dispatch(setError(e.message))
+        } finally {
+            dispatch(setPreloaderFilter(false))
         }
     }
 }
@@ -59,7 +63,7 @@ const filteredGenres = (genreValue, card) => {
 
 export const getInfoApi = (id) => {
     return async (dispatch) => {
-        dispatch(preloader({preloaderCard: true}))
+        dispatch(setPreloaderCard(true))
         try {
             const response = await Promise.all([
                 $api.get(`v1/manga/${id}/`),
@@ -72,7 +76,7 @@ export const getInfoApi = (id) => {
         } catch (e) {
             dispatch(setError(e.message))
         } finally {
-            dispatch(preloader({preloaderCard: false}))
+            dispatch(setPreloaderCard(false))
         }
     }
 }
@@ -81,7 +85,6 @@ export const addCommentApi = (id, text) => {
     return async (dispatch) => {
         try {
             const response = await $authApi.post(`v1/manga/${id}/add-comment/`, {id, text})
-            console.log(response)
             if (response.status === 201) {
                 alert('Вы успешно отправили комментарий')
                 dispatch(getInfoApi(id))

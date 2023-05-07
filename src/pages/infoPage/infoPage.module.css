@@ -1,4 +1,4 @@
-.card__content_top_title, .card__content_top_box .title, .card__content_top_box .subtitle, .card__description_title, .card__description_info, .card__back, .card__comments_top .top, .card__comments_comment .content .user_info_name, .card__comments_comment .content .text {
+.card__content_top_title, .card__content_top_box .title, .card__content_top_box .subtitle, .card__description_title, .card__description_info, .card__back, .card__comments_top .top, .card__comments_comment .content .user_info_name, .card__comments_comment .content .text, .loading {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400; }
@@ -160,3 +160,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 32px; }
+
+.loading {
+  color: red;
+  font-size: 25px; }

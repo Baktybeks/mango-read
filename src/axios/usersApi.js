@@ -37,7 +37,6 @@ export const regApi = (formData) => {
     return async (dispatch) => {
         try {
             const {data} = await $api.post('auth/signup/', formData)
-            console.log(data)
             if (data.status === 201) {
                 alert('Вы успешно зарегистрированы')
                 dispatch(setModalActive(false))

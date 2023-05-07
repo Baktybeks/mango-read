@@ -1,23 +1,26 @@
 import React, {useEffect, useState} from 'react'
-import Card from "../../components/card/Card"
-import classes from "./mainPage.module.css"
-import MuiCheckbox from "../../components/muiCheckbox/MuiCheckbox"
 import {useDispatch, useSelector} from "react-redux"
-import AppPaginationManga from "../../components/appPaginationManga/AppPaginationManga"
+import classes from "./mainPage.module.css"
+
 import {getMangaListApi} from "../../axios/mangaApi"
-import {setGenreCheckbox, setSelectedInputs, setTypeCheckbox} from "../../store/slices/filterSlice"
+
+import Card from "../../components/card/Card"
+import MuiCheckbox from "../../components/muiCheckbox/MuiCheckbox"
+import AppPaginationManga from "../../components/appPaginationManga/AppPaginationManga"
 import AppPaginationFilteredManga from "../../components/appPaginationFilteredManga/AppPaginationFilteredManga"
+
+import {setGenreCheckbox, setSelectedInputs, setTypeCheckbox} from "../../store/slices/filterSlice"
 
 function MainPage() {
 
     const dispatch = useDispatch()
 
-    const [inputYears, setInputYears] = useState({inp_year_first: '', inp_year_second: ''})
     const {genreValue, typeValue, mangaList} = useSelector(state => state.mangaReducer)
     const {typeCheckbox, genreCheckbox, selectedInputs, filteredManga} = useSelector(state => state.filterReducer)
-    const {preloader} = useSelector(state => state.preloaderReducer)
+    const {preloader, preloaderFilter} = useSelector(state => state.preloaderReducer)
     const {error} = useSelector(state => state.errorReducer)
 
+    const [inputYears, setInputYears] = useState({inp_year_first: '', inp_year_second: ''})
     const [manga, setManga] = useState(true)
     const [isEmptyType, setIsEmptyType] = useState(true)
     const [isEmptyGenre, setIsEmptyGenre] = useState(true)
@@ -93,11 +96,8 @@ function MainPage() {
                         <span className={classes.nav_arrow_left}></span> Назад
                     </div>
                 </div>}
-
                 <div className={`${classes.main__aside_types} ${!manga ? classes.type_true : ''}`}>
-
                     <MuiCheckbox muiCheckbox={manga ? typeValue : genreValue} manga={manga}/>
-
                 </div>
                 <div className={`${classes.main__aside_years} ${!manga ? classes.type_true : ""}`}>
                     <input className={classes.input}
@@ -129,7 +129,16 @@ function MainPage() {
                     error
                         ?
                         <p>{error}</p>
-                        : (isFilter ? mangaList : filteredManga).map(card => <Card key={card.id} card={card}/>)}
+                        :
+                        preloaderFilter ?
+                            <h1 className={classes.loading}>Loading......</h1>
+                            :
+                            filteredManga.length === 0 ?
+                                <div style={{fontFamily: 'Montserrat', fontSize: '24px'}}>по вашему запросу ничего не
+                                    найдено</div>
+                                :
+                                (isFilter ? mangaList : filteredManga).map(card => <Card key={card.id} card={card}/>)
+                }
             </section>
         </div>
         <div className={classes.pagination}>

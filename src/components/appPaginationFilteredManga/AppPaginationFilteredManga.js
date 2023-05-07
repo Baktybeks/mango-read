@@ -38,12 +38,13 @@ function AppPaginationFilteredManga() {
 
     useEffect(() => {
         dispatch(setFilteredManga(currentPageData))
+
     }, [dispatch, currentPage, selectedGenre, selectedType, selectedYears])
 
     return (
         <>
             {
-                !totalPages ? <div style={{fontFamily: 'Montserrat', fontSize: '24px'}}>по вашему запросу не найдено</div> :
+                !totalPages ? "":
                     <Pagination
                         count={totalPages}
                         page={currentPage}

@@ -1,12 +1,15 @@
 import React, {useEffect} from 'react'
 import {useNavigate, useParams} from "react-router-dom"
-import classes from "./infoPage.module.css"
 import {useDispatch, useSelector} from "react-redux"
+import {getInfoApi} from "../../axios/mangaApi"
+
+import classes from "./infoPage.module.css"
+
+import {setCommentModalActive} from "../../store/slices/infoSlice"
+
 import Modal from "../../components/modal/Modal"
 import AddComment from "../../components/addComment/AddComment"
-import {setCommentModalActive} from "../../store/slices/infoSlice"
 import AppPaginationComment from "../../components/appPaginationComment/AppPaginationComment"
-import {getInfoApi} from "../../axios/mangaApi"
 
 function InfoPage() {
 
@@ -17,7 +20,7 @@ function InfoPage() {
     const {card, commentModalActive, currentComments} = useSelector(state => state.infoReducer)
     const {user} = useSelector(state => state.usersReducer)
     const {error} = useSelector(state => state.errorReducer)
-    const {preloaderCard, preloaderComments} = useSelector(state => state.preloaderReducer)
+    const {preloaderCard} = useSelector(state => state.preloaderReducer)
 
     const handleAddComment = () => {
         if (!user || !Object.keys(user).length) {
@@ -26,6 +29,7 @@ function InfoPage() {
             dispatch(setCommentModalActive(true))
         }
     }
+
     useEffect(() => {
             dispatch(getInfoApi(id))
     }, [dispatch, id])
@@ -84,7 +88,7 @@ function InfoPage() {
                                 </div>
                                 <ul>
                                     {
-                                        preloaderComments
+                                        preloaderCard
                                             ?
                                             <h1 className={classes.loading}>Loading......</h1>
                                             :

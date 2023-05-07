@@ -5,17 +5,21 @@ const preloaderSlice = createSlice({
     initialState: {
         preloader: false,
         preloaderCard: false,
-        preloaderComments: false,
+        preloaderFilter: false
     },
     reducers: {
-        preloader: (state,action) => {
-            state.preloader = action.payload.preloader
-            state.preloaderComments = action.payload.preloaderComments
-            state.preloaderCard = action.payload.preloaderCard
+        preloader: (state, action) => {
+            state.preloader = action.payload
+        },
+        setPreloaderFilter: (state, action) => {
+            state.preloaderFilter = action.payload
+        },
+        setPreloaderCard: (state, action) => {
+            state.preloaderCard = action.payload
         }
     }
 })
 
-export const {preloader} = preloaderSlice.actions
+export const {preloader, setPreloaderFilter,setPreloaderCard} = preloaderSlice.actions
 
 export default preloaderSlice.reducer

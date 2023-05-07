@@ -15,6 +15,7 @@ const filterSlice = createSlice({
             },
         },
         allMangaList: [],
+        isEmptyFilter: true
     },
     reducers: {
         setFilteredManga: (state, action) => {
