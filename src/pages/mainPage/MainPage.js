@@ -9,22 +9,32 @@ import MuiCheckbox from "../../components/muiCheckbox/MuiCheckbox"
 import AppPaginationManga from "../../components/appPaginationManga/AppPaginationManga"
 import AppPaginationFilteredManga from "../../components/appPaginationFilteredManga/AppPaginationFilteredManga"
 
-import {setGenreCheckbox, setSelectedInputs, setTypeCheckbox} from "../../store/slices/filterSlice"
+import {
+    setGenreCheckbox, setInputYears,
+    setIsFilter,
+    setSelectedInputs,
+    setTypeCheckbox
+} from "../../store/slices/filterSlice"
 
 function MainPage() {
 
     const dispatch = useDispatch()
 
     const {genreValue, typeValue, mangaList} = useSelector(state => state.mangaReducer)
-    const {typeCheckbox, genreCheckbox, selectedInputs, filteredManga} = useSelector(state => state.filterReducer)
+    const {
+        typeCheckbox,
+        genreCheckbox,
+        selectedInputs,
+        filteredManga,
+        isFilter,
+        inputYears
+    } = useSelector(state => state.filterReducer)
     const {preloader, preloaderFilter} = useSelector(state => state.preloaderReducer)
     const {error} = useSelector(state => state.errorReducer)
 
-    const [inputYears, setInputYears] = useState({inp_year_first: '', inp_year_second: ''})
     const [manga, setManga] = useState(true)
     const [isEmptyType, setIsEmptyType] = useState(true)
     const [isEmptyGenre, setIsEmptyGenre] = useState(true)
-    const [isFilter, setIsFilter] = useState(true)
 
     const isEmptyFilter = () => {
         isEmptyType && isEmptyGenre
@@ -34,7 +44,7 @@ function MainPage() {
 
     const handleClearType = () => {
         dispatch(setTypeCheckbox([]))
-        setInputYears({inp_year_first: '', inp_year_second: ''})
+        dispatch(setInputYears({inp_year_first: '', inp_year_second: ''}))
         dispatch(setSelectedInputs({
             ...selectedInputs, selectedYears: {inp_year_first: '', inp_year_second: ''}, selectedType: []
         }))
@@ -51,9 +61,9 @@ function MainPage() {
 
     const followBtn = () => setManga(!manga)
 
-    const handleYearsChange = (event) => setInputYears({
+    const handleYearsChange = (event) => dispatch(setInputYears({
         ...inputYears, [event.target.name]: Number(event.target.value)
-    })
+    }))
 
     const sentTypeGenre = () => {
         let sentTypeCheckbox = []
