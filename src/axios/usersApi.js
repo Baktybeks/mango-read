@@ -8,12 +8,19 @@ export const signInApi = (username, password, checkbox) => {
     return async (dispatch) => {
         try {
             const {data} = await $api.post('auth/signin/', {username, password})
-            localStorage.setItem('REFRESH_TOKEN', data.refresh)
-            sessionStorage.setItem('ACCESS_TOKEN', data.access)
-            dispatch(setLogin({access: data.access}))
-            dispatch(getUserApi(jwtDecode(data.access).user_id, checkbox))
+            console.log(data)
+            if (data === "User not found, try again body!") {
+                alert(data)
+            //    странно когда ошибка имени или почты идет статус 200 и сообщение "User not found, try again body!"
+            } else {
+                localStorage.setItem('REFRESH_TOKEN', data.refresh)
+                sessionStorage.setItem('ACCESS_TOKEN', data.access)
+                dispatch(setLogin({access: data.access}))
+                dispatch(getUserApi(jwtDecode(data.access).user_id, checkbox))
+            }
         } catch (e) {
             console.log('error', e)
+            alert(e.message)
         }
     }
 }

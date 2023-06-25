@@ -1,13 +1,37 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom"
 import classes from "./card.module.sass"
+import {useDispatch, useSelector} from "react-redux"
+import {
+    setGenreCheckbox,
+    setInputYears,
+    setIsFilter,
+    setSelectedInputs,
+    setTypeCheckbox
+} from "../../store/slices/filterSlice"
+
 
 function Card({card}) {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {
+        selectedInputs,
+    } = useSelector(state => state.filterReducer)
 
     const clickHandler = () => {
+        dispatch(setTypeCheckbox([]))
+        dispatch(setInputYears({inp_year_first: '', inp_year_second: ''}))
+        dispatch(setSelectedInputs({
+            ...selectedInputs, selectedYears: {inp_year_first: '', inp_year_second: ''}, selectedType: []
+        }))
+        dispatch(setGenreCheckbox([]))
+        dispatch(setSelectedInputs({
+            ...selectedInputs, "selectedGenre": []
+        }))
+        dispatch(setIsFilter(true))
         navigate(`/info/${card.id}/`)
     }
+
 
     let sliceName = card.ru_name.slice(0,20)
     if (sliceName.length < card.ru_name.length) {

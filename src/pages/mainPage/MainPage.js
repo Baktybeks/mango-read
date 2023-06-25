@@ -11,7 +11,6 @@ import AppPaginationFilteredManga from "../../components/appPaginationFilteredMa
 
 import {
     setGenreCheckbox, setInputYears,
-    setIsFilter,
     setSelectedInputs,
     setTypeCheckbox
 } from "../../store/slices/filterSlice"
@@ -26,7 +25,6 @@ function MainPage() {
         genreCheckbox,
         selectedInputs,
         filteredManga,
-        isFilter,
         inputYears
     } = useSelector(state => state.filterReducer)
     const {preloader, preloaderFilter} = useSelector(state => state.preloaderReducer)
@@ -35,6 +33,7 @@ function MainPage() {
     const [manga, setManga] = useState(true)
     const [isEmptyType, setIsEmptyType] = useState(true)
     const [isEmptyGenre, setIsEmptyGenre] = useState(true)
+    const [isFilter, setIsFilter] = useState(true)
 
     const isEmptyFilter = () => {
         isEmptyType && isEmptyGenre
@@ -87,9 +86,8 @@ function MainPage() {
             }))
         }
     }
-
     useEffect(() => {
-        dispatch(getMangaListApi(12))
+        dispatch(getMangaListApi(3))
         isEmptyFilter()
     }, [dispatch, isEmptyType, isEmptyGenre])
 

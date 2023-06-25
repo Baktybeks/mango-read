@@ -38,7 +38,6 @@ function AppPaginationFilteredManga() {
 
     useEffect(() => {
         dispatch(setFilteredManga(currentPageData))
-
     }, [dispatch, currentPage, selectedGenre, selectedType, selectedYears])
 
     return (
