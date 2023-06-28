@@ -1,0 +1,26 @@
+.label {
+  gap: 10px;
+  display: flex;
+  cursor: pointer; }
+
+.label_title {
+  font-size: 24px;
+  line-height: 35px;
+  color: #000; }
+
+.label_input {
+  width: 35px;
+  height: 35px;
+  appearance: none;
+  border: 2px solid #2FE09B;
+  border-radius: 5px;
+  background-color: #ffffff;
+  outline: none;
+  background-image: url("../../assets/images/icon/tick.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  gap: 10px; }
+
+.label_input:checked {
+  background-color: #2FE09B; }

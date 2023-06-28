@@ -1,24 +1,23 @@
 import React from 'react'
 import {
     Box,
-    FormControlLabel,
-    Checkbox,
     FormControl,
     FormGroup,
-    Typography,
     createTheme, FormLabel
 } from "@mui/material"
 import {useDispatch, useSelector} from "react-redux"
 import {setGenreCheckbox, setTypeCheckbox} from "../../store/slices/filterSlice"
+import classes from "./muiCheckbox.module.sass"
 
-const theme = createTheme({typography: {fontFamily: 'Montserrat', fontSize: '24px'}})
-
-const checkboxStyle = {
-    '& .MuiSvgIcon-root': {fontSize: 49, color: "#2FE09B"},
-    '&.Mui-checked': {color: "#2FE09B"},
-    mr: "10px",
-    ml: "10px"
-}
+const theme = createTheme({
+    typography:
+        {
+            fontFamily: 'Montserrat',
+            fontSize: '24px',
+            mr: "10px",
+            ml: "10px"
+        },
+})
 
 function MuiCheckbox({muiCheckbox, manga}) {
 
@@ -45,20 +44,36 @@ function MuiCheckbox({muiCheckbox, manga}) {
             <Box>
                 <FormControl>
                     {
-                        manga ? <FormLabel theme={theme} sx={{mb: "10px"}}>Тип</FormLabel> :
-                            <FormLabel theme={theme} sx={{mb: "10px"}}>Жанр</FormLabel>
+                        manga ? <FormLabel theme={theme} sx={
+                            {
+                                mt: "33px",
+                                mb: "10px",
+                                color: "#000000"
+                            }
+                        }>Тип</FormLabel> :
+                            <FormLabel theme={theme} sx={
+                                {
+                                    mt: "8px",
+                                    mb: "5px",
+                                    fontSize: 35,
+                                    color: "#000000"
+                                }
+                            }>Жанры</FormLabel>
                     }
+
                     <FormGroup sx={{gap: "10px"}}>
                         {muiCheckbox.map((checkBox) =>
-                            <FormControlLabel
-                                label={<Typography theme={theme}>{checkBox.title}</Typography>}
-                                control={<Checkbox
-                                    sx={checkboxStyle}
-                                    value={checkBox.title}
-                                    key={checkBox.id}
-                                    checked={setManga.includes(checkBox.title)}
-                                    onChange={handleSkillChange}/>}
-                            />
+                                <label htmlFor="checkbox" className={classes.label}>
+                                    <input
+                                        className={classes.label_input}
+                                        type="checkbox"
+                                        value={checkBox.title}
+                                        key={checkBox.id}
+                                        checked={setManga.includes(checkBox.title)}
+                                        onChange={handleSkillChange}
+                                    />
+                                    <div className={classes.label_title}>{checkBox.title}</div>
+                                </label>
                         )}
                     </FormGroup>
                 </FormControl>

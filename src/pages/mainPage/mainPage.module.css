@@ -21,13 +21,12 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 33px;
   position: relative; }
 
 .main__aside_manga_type {
   margin-top: 20px;
   width: 100%;
-  padding: 10px 15px;
+  padding: 10px 12px 10px 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -40,19 +39,21 @@
 .main__aside_manga_type .nav {
   display: flex;
   align-items: center;
-  gap: 17px; }
+  gap: 14px;
+  color: #878787; }
 
 .main__aside_manga_type .nav_arrow_right {
   display: block;
   width: 15px;
   height: 23px;
   color: #878787;
-  background-image: url("../../assets/images/icon/arrow.svg");
+  background-image: url("../../assets/images/icon/arrow_right.svg");
   background-repeat: no-repeat;
+  background-position: center;
   vertical-align: bottom; }
 
 .main__aside_manga_genre {
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100%;
   padding: 10px 15px;
   display: flex;
@@ -67,20 +68,24 @@
 .main__aside_manga_genre .nav {
   display: flex;
   align-items: center;
-  gap: 17px; }
+  justify-content: flex-start;
+  gap: 10px;
+  color: #878787;
+  height: 30px; }
 
 .main__aside_manga_genre .nav_arrow_left {
   display: block;
-  width: 15px;
-  height: 23px;
+  width: 17px;
+  height: 28px;
   color: #878787;
-  background-image: url("../../assets/images/icon/arrow.svg");
-  rotate: 180deg;
+  background-image: url("../../assets/images/icon/arrow_left.svg");
   background-repeat: no-repeat;
+  background-size: cover;
   vertical-align: bottom; }
 
 .main__aside_types {
   margin-left: 15px;
+  margin-right: 4px;
   font-size: 24px;
   line-height: 35px;
   color: #000000; }
@@ -90,7 +95,15 @@
   padding-left: 5px;
   height: 500px; }
 
+.main__aside_types.type_true::-webkit-scrollbar {
+  width: 10px; }
+
+.main__aside_types.type_true::-webkit-scrollbar-thumb {
+  background-color: #D5D6D5;
+  border-radius: 10px; }
+
 .main__aside_years {
+  margin-top: 33px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -108,7 +121,7 @@
   gap: 10px;
   width: 168px;
   height: 55px;
-  border: 4px solid #2FE09B;
+  border: 2px solid #2FE09B;
   border-radius: 8px;
   font-size: 20px;
   line-height: 24px;

@@ -94,16 +94,20 @@ function MainPage() {
     return (<main className={`container ${classes.main}`}>
         <div className={classes.main_box}>
             <aside className={classes.main__aside}>
-                {manga ? <div className={classes.main__aside_manga_type} onClick={followBtn}>
-                    Жанры
-                    <div className={classes.nav}>
-                        все <span className={classes.nav_arrow_right}></span>
+                {manga ?
+                    <div className={classes.main__aside_manga_type} onClick={followBtn}>
+                        Жанры
+                        <div className={classes.nav}>
+                            все<span className={classes.nav_arrow_right}></span>
+                        </div>
                     </div>
-                </div> : <div className={classes.main__aside_manga_genre} onClick={followBtn}>
-                    <div className={classes.nav}>
-                        <span className={classes.nav_arrow_left}></span> Назад
+                    :
+                    <div className={classes.main__aside_manga_genre} onClick={followBtn}>
+                        <div className={classes.nav}>
+                            <span className={classes.nav_arrow_left}></span> Назад
+                        </div>
                     </div>
-                </div>}
+                }
                 <div className={`${classes.main__aside_types} ${!manga ? classes.type_true : ''}`}>
                     <MuiCheckbox muiCheckbox={manga ? typeValue : genreValue} manga={manga}/>
                 </div>
