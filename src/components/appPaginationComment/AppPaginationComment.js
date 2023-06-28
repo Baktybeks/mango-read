@@ -1,9 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import {Pagination, PaginationItem} from "@mui/material"
+import {createTheme, Pagination, PaginationItem, ThemeProvider} from "@mui/material"
 import {useDispatch, useSelector} from "react-redux"
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import {setCurrentComments} from "../../store/slices/infoSlice"
+import left_pag from "../../assets/images/icon/left_pag.svg"
+import right_pag from "../../assets/images/icon/right_pag.svg"
+
+const theme = createTheme({
+    palette: {
+        secondary: {
+            main: '#2fdf9a',
+        },
+    },
+});
 
 function AppPaginationComment() {
 
@@ -27,26 +35,59 @@ function AppPaginationComment() {
 
     useEffect(() => {
         dispatch(setCurrentComments(currentPageData))
-    }, [dispatch,currentPage])
-
+    }, [dispatch, currentPage])
+    const getItemColor = (itemType) => {
+        switch (itemType) {
+            case 'next':
+            case 'previous':
+                return '#F2F2F2FF';
+            case 'page':
+                return 'gray';
+            default:
+                return 'black';
+        }
+    };
     return (
         <>
             {
                 !totalPages ? <div style={{fontFamily: 'Montserrat', fontSize: '24px'}}>Комментарий: Ещё нету</div> :
-                    <Pagination
-                        count={totalPages}
-                        page={currentPage}
-                        onChange={handlePageChange}
-                        color="success"
-                        renderItem={(item) => (
-                            <PaginationItem
-                                sx={{fontFamily: 'Montserrat', fontSize: '24px', m: 0.3}}
-                                size="large"
-                                slots={{previous: ArrowBackIosNewIcon, next: ArrowForwardIosIcon}}
-                                {...item}
-                            />
-                        )}
-                    />
+                    <ThemeProvider theme={theme}>
+                        <Pagination
+                            count={totalPages}
+                            page={currentPage}
+                            onChange={handlePageChange}
+                            color="secondary"
+                            renderItem={(item) => (
+                                <PaginationItem
+                                    sx={{fontFamily: 'Montserrat',
+                                        fontSize: '24px',
+                                        color: getItemColor(item.type),
+                                        width: '45px',
+                                        height: '45px',
+                                        borderRadius: '100%',
+                                        p: '20px',
+                                        m: 0.3,
+                                        '&.Mui-selected': {
+                                            color: 'white',
+                                        },
+                                        '&.MuiPaginationItem-ellipsis': {
+                                            color: 'gray',
+                                        },
+                                        '&.MuiPaginationItem-icon': {
+                                            color: 'gray',
+                                        },
+                                        '&.MuiPaginationItem-previousNext': {
+                                            backgroundImage: `url(${item.type === 'previous' ? left_pag : right_pag})`,
+                                            backgroundSize: '35%',
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundPosition: 'center', // Отцентровать изображение
+                                        },
+                                    }}
+                                    {...item}
+                                />
+                            )}
+                        />
+                    </ThemeProvider>
             }
         </>
     )

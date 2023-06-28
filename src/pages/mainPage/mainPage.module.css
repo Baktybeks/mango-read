@@ -10,7 +10,7 @@
 .main .main_box {
   display: flex;
   align-items: flex-start;
-  padding: 32px 0 28px;
+  padding: 32px 0 33px;
   gap: 20px; }
 
 .main__aside {
@@ -24,9 +24,8 @@
   position: relative; }
 
 .main__aside_manga_type {
-  margin-top: 20px;
-  width: 100%;
-  padding: 10px 12px 10px 15px;
+  margin: 20px 2px 0 5px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -36,13 +35,17 @@
   color: #000000;
   cursor: pointer; }
 
-.main__aside_manga_type .nav {
+.main__aside_manga_type:hover {
+  border-radius: 10px;
+  background: rgba(135, 135, 135, 0.2); }
+
+.main__aside .nav {
   display: flex;
   align-items: center;
   gap: 14px;
   color: #878787; }
 
-.main__aside_manga_type .nav_arrow_right {
+.main__aside .nav_arrow_right {
   display: block;
   width: 15px;
   height: 23px;
@@ -53,9 +56,8 @@
   vertical-align: bottom; }
 
 .main__aside_manga_genre {
-  margin-top: 10px;
-  width: 100%;
-  padding: 10px 15px;
+  margin: 10px 5px 0;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -64,6 +66,10 @@
   line-height: 35px;
   color: #000000;
   cursor: pointer; }
+
+.main__aside_manga_genre:hover {
+  border-radius: 10px;
+  background: rgba(135, 135, 135, 0.2); }
 
 .main__aside_manga_genre .nav {
   display: flex;
@@ -186,4 +192,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 32px; }
+  margin-bottom: 35px; }

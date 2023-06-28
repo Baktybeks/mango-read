@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import classes from "./mainPage.module.sass"
-
 import {getMangaListApi} from "../../axios/mangaApi"
-
 import Card from "../../components/card/Card"
 import MuiCheckbox from "../../components/muiCheckbox/MuiCheckbox"
 import AppPaginationManga from "../../components/appPaginationManga/AppPaginationManga"

@@ -30,7 +30,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div className={classes.map}>
-                    <Ymap/> {/*google map api платная*/}
+                    <Ymap/>
                 </div>
             </div>
             <div className={classes.bottom}>

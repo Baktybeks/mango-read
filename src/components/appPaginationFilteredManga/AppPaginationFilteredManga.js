@@ -1,9 +1,19 @@
 import React, {useEffect, useState} from 'react'
-import {Pagination, PaginationItem} from "@mui/material"
+import {createTheme, Pagination, PaginationItem, ThemeProvider} from "@mui/material"
 import {useDispatch, useSelector} from "react-redux"
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import {setFilteredManga} from "../../store/slices/filterSlice"
+import left_pag from "../../assets/images/icon/left_pag.svg"
+import right_pag from "../../assets/images/icon/right_pag.svg"
+
+
+const theme = createTheme({
+    palette: {
+        secondary: {
+            main: '#2fdf9a',
+        },
+    },
+})
+
 
 function AppPaginationFilteredManga() {
 
@@ -20,7 +30,7 @@ function AppPaginationFilteredManga() {
         const isType = selectedType.length === 0 || selectedType.includes(item.type)
         const isYear = (!inp_year_first && !inp_year_second) ||
             (item.issue_year >= inp_year_first && item.issue_year <= inp_year_second)
-        const isGenre = selectedGenre.length === 0 || selectedGenre.every(genre => item.genre.includes(genre));
+        const isGenre = selectedGenre.length === 0 || selectedGenre.every(genre => item.genre.includes(genre))
         return isGenre && isType && isYear
     })
 
@@ -40,24 +50,59 @@ function AppPaginationFilteredManga() {
         dispatch(setFilteredManga(currentPageData))
     }, [dispatch, currentPage, selectedGenre, selectedType, selectedYears])
 
+    const getItemColor = (itemType) => {
+        switch (itemType) {
+            case 'next':
+            case 'previous':
+                return '#F2F2F2FF';
+            case 'page':
+                return 'gray';
+            default:
+                return 'black';
+        }
+    };
+
     return (
         <>
             {
-                !totalPages ? "":
-                    <Pagination
-                        count={totalPages}
-                        page={currentPage}
-                        onChange={handlePageChange}
-                        color="success"
-                        renderItem={(item) => (
-                            <PaginationItem
-                                sx={{fontFamily: 'Montserrat', fontSize: '24px', m: 0.3}}
-                                size="large"
-                                slots={{previous: ArrowBackIosNewIcon, next: ArrowForwardIosIcon}}
-                                {...item}
-                            />
-                        )}
-                    />
+                !totalPages ? "" :
+                    <ThemeProvider theme={theme}>
+                        <Pagination
+                            count={totalPages}
+                            page={currentPage}
+                            onChange={handlePageChange}
+                            color="secondary"
+                            renderItem={(item) => (
+                                <PaginationItem
+                                    sx={{fontFamily: 'Montserrat',
+                                        fontSize: '24px',
+                                        color: getItemColor(item.type),
+                                        width: '45px',
+                                        height: '45px',
+                                        borderRadius: '100%',
+                                        p: '20px',
+                                        m: '0px',
+                                        '&.Mui-selected': {
+                                            color: 'white',
+                                        },
+                                        '&.MuiPaginationItem-ellipsis': {
+                                            color: 'gray',
+                                        },
+                                        '&.MuiPaginationItem-icon': {
+                                            color: 'gray',
+                                        },
+                                        '&.MuiPaginationItem-previousNext': {
+                                            backgroundImage: `url(${item.type === 'previous' ? left_pag : right_pag})`,
+                                            backgroundSize: '35%',
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundPosition: 'center',
+                                        },
+                                    }}
+                                    {...item}
+                                />
+                            )}
+                        />
+                    </ThemeProvider>
             }
         </>
     )
